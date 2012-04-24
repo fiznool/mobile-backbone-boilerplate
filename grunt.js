@@ -75,6 +75,9 @@ module.exports = function(grunt) {
     //  To learn more about using the server task, please refer to the code
     //  until documentation has been written.
     server: {
+      files: { "favicon.ico": "favicon.ico" },
+      host: '0.0.0.0',
+
       debug: {
         folders: {
           "app": "dist/debug",
