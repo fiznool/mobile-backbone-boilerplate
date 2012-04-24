@@ -29,17 +29,8 @@ module.exports = function(grunt) {
       }
     },
 
-    // The jst task compiles all application templates into JavaScript
-    // functions with the underscore.js template function from 1.2.4.  You can
-    // change the namespace and the template options, by reading this:
-    // https://github.com/tbranyen/build-tasks/tree/master/jst
-    //
-    // The concat task depends on this file to exist, so if you decide to
-    // remove this, ensure concat is updated accordingly.
-    jst: {
-      "dist/debug/templates.js": [
-        "app/templates/**/*.html"
-      ]
+    qunit: {
+      files: ["qunit.html"]
     },
 
     // The concatenate task is used here to merge the almond require/define
@@ -49,7 +40,6 @@ module.exports = function(grunt) {
     concat: {
       "dist/debug/require.js": [
         "assets/js/libs/almond.js",
-        "dist/debug/templates.js",
         "dist/debug/require.js"
       ]
     },
@@ -60,7 +50,7 @@ module.exports = function(grunt) {
     // only want to load one stylesheet in index.html.
     mincss: {
       "dist/release/index.css": [
-        "assets/css/style.css"
+        "assets/css/**/*.css"
       ]
     },
 
@@ -85,29 +75,28 @@ module.exports = function(grunt) {
     //  To learn more about using the server task, please refer to the code
     //  until documentation has been written.
     server: {
-      files: { "favicon.ico": "favicon.ico" },
-
       debug: {
-        files: { "favicon.ico": "favicon.ico" },
-
         folders: {
           "app": "dist/debug",
+          "app/templates": "app/templates",
           "assets/js/libs": "dist/debug"
         }
       },
 
       release: {
-        // These two options make it easier for deploying, by using whatever
-        // PORT is available in the environment and defaulting to any IP.
-        host: "0.0.0.0",
-        port: process.env.PORT || 8000,
-
-        files: { "favicon.ico": "favicon.ico" },
-
         folders: {
           "app": "dist/release",
+          "app/templates": "app/templates",
           "assets/js/libs": "dist/release",
           "assets/css": "dist/release"
+        }
+      },
+
+      qunit: {
+        index: './qunit.html',
+        port: 8001,
+        folders: {
+          'test': './test'
         }
       }
     },
@@ -135,7 +124,7 @@ module.exports = function(grunt) {
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("default", "clean lint jst requirejs concat");
+  grunt.registerTask("default", "clean lint qunit requirejs concat");
 
   // The debug task is simply an alias to default to remain consistent with
   // debug/release.
@@ -145,4 +134,6 @@ module.exports = function(grunt) {
   // dist/debug/require.js file and CSS files.
   grunt.registerTask("release", "default min mincss");
 
+  // The preflight task will lint and test your code, ready to be checked in to source control.
+  grunt.registerTask("preflight", "lint qunit");
 };

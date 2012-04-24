@@ -1,0 +1,15 @@
+@import "base";
+
+body {
+	margin-left: 1em;
+}
+
+#main h1 {
+	color: $loud-color;
+}
+
+#button-target {
+	width: 10em;
+	height: 4em;
+	@include border-radius(0.5em);
+}

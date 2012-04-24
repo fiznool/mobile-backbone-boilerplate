@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Backbone Boilerplate QUnit Test Suite</title>
+
+  <!-- QUnit styles -->
+  <link rel="stylesheet" href="test/qunit/vendor/qunit-1.5.0pre.css">
+</head>
+
+<body>
+  <!-- QUnit stucture -->
+  <div class="dataset-test">
+    <!-- qunit-header shows the name of the test suite-->
+    <h1 id="qunit-header">Backbone Boilerplate QUnit Test Suite</h1>
+
+    <!-- qunit-banner shows up as red if a test fails and green if all tests pass -->
+    <h2 id="qunit-banner"></h2>
+
+    <!-- qunit-testrunner-toolbar contains additional options for configuring the display of tests -->
+    <div id="qunit-testrunner-toolbar"></div>
+
+    <!-- qunit-userAgent displays the navigator.userAgent property -->
+    <h2 id="qunit-userAgent"></h2>
+
+    <!-- qunit-tests is a container for our test results -->
+    <ol id="qunit-tests"></ol>
+
+    <!-- qunit-fixture is a container to place DOM elements to test -->
+    <!-- QUnit resets the contents of this container after each test -->
+    <div id="qunit-fixture"></div>
+  
+  <!-- Testing libs -->
+  <script src="test/qunit/vendor/qunit-1.5.0pre.js"></script>
+  <script src="test/qunit/vendor/sinon-1.3.2.js"></script>
+  <script src="test/qunit/vendor/sinon-qunit-1.0.0.js"></script>
+
+  <!-- Load application -->
+  <script data-main="test/qunit/spec" src="assets/js/libs/require.js"></script>
+
+</body>
+</html>

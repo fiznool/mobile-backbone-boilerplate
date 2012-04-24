@@ -1,0 +1,20 @@
+/* line 3, ../../app/styles/helloworld.scss */
+body {
+  margin-left: 1em;
+}
+
+/* line 7, ../../app/styles/helloworld.scss */
+#main h1 {
+  color: #111111;
+}
+
+/* line 11, ../../app/styles/helloworld.scss */
+#button-target {
+  width: 10em;
+  height: 4em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+}

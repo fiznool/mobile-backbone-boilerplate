@@ -1,48 +1,25 @@
-require([
-  "namespace",
+define(function(require) {
+  var      libs = require('libs'),
+              $ = libs.$,
+       Backbone = libs.backbone;
+     HelloWorld = require('modules/helloworld');
 
-  // Libs
-  "jquery",
-  "use!backbone",
-
-  // Modules
-  "modules/example"
-],
-
-function(namespace, $, Backbone, Example) {
-
-  // Defining the application router, you can attach sub routers here.
+ // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
       "": "index",
-      ":hash": "index"
+      ":hash": "index",
+      "*actions": "index"
     },
 
     index: function(hash) {
-      var route = this;
-      var tutorial = new Example.Views.Tutorial();
-
-      // Attach the tutorial to the DOM
-      tutorial.render(function(el) {
-        $("#main").html(el);
-
-        // Fix for hashes in pushState and hash fragment
-        if (hash && !route._alreadyTriggered) {
-          // Reset to home, pushState support automatically converts hashes
-          Backbone.history.navigate("", false);
-
-          // Trigger the default browser behavior
-          location.hash = hash;
-
-          // Set an internal flag to stop recursive looping
-          route._alreadyTriggered = true;
-        }
+      var view = new HelloWorld.Views.Main({
+        el: $("#main"),
+        model: new HelloWorld.Model()
       });
+      view.render();
     }
   });
-
-  // Shorthand the application namespace
-  var app = namespace.app;
 
   // Treat the jQuery ready function as the entry point to the application.
   // Inside this function, kick-off all initialization, everything up to this
@@ -50,7 +27,7 @@ function(namespace, $, Backbone, Example) {
   $(function() {
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
-    app.router = new Router();
+    var router = new Router();
 
     // Trigger the initial route and enable HTML5 History API support
     Backbone.history.start({ pushState: true });
