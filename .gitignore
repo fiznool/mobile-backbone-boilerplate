@@ -1,3 +1,5 @@
+.DS_Store
+.sass-cache
 dist/
 npm-debug.log
 .lock-wscript

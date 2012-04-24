@@ -20,6 +20,9 @@ define([
     interpolate : /\{\{(.+?)\}\}/g
   };
 
+  // Extend Backbone to clear up Views when they are removed
+  
+
   return {
     $: tryNoConflict($),
     _: tryNoConflict(_),

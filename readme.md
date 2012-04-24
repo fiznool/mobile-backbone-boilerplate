@@ -16,7 +16,7 @@ This boilerplate provides a starting point to build single-page mobile web apps,
 - [Library Bootstrapping](http://fiznool.com/post/18436104594/bootstrapping-your-libs-with-requirejs) using a `libs.js` file, which defines any pre-requisites for libraries before they are required.
 - [QUnit](http://docs.jquery.com/QUnit) JavaScript unit testing tool.
 - [Grunt](https://github.com/cowboy/grunt) to lint, test, concatenate and minify the app, ready for deployment.
-- Optionally, [Compass](http://compass-style.org/) to simplify styling.
+- [Compass](http://compass-style.org/) to simplify styling.
 - [Energize](https://github.com/davidcalhoun/energize.js) to speed up clickable (touchable) links on mobile devices.
 
 Folder Structure
@@ -140,16 +140,12 @@ Each page in the app is written as a Backbone/RequireJS module. Markup is inject
 Stylesheets
 ---
 
-This project uses CSS `@import` to manage stylesheets. There is a single master CSS file at `assets/css/index.css` which is responsible for importing all other required CSS files.
+This project expects a single master CSS file at `assets/css/index.css` for styling. You have two options to create this CSS file:
 
-For the other CSS files, you have choices:
+1. Create 'vanilla' CSS files by hand and save them into the `assets/css` folder. For each CSS file, add a `@import` statement manually into `assets/css/index.css`.
+2. Create LESS/SASS/Stylus files and place them in the `app/styles` folder. If you choose this option, you are responsible for setting up a SASS/LESS compiler to watch this directory and compile the lot into the file `assets/css/index.css`, whenever the file is saved.
 
-1. Create 'vanilla' CSS files by hand and save them into the `assets/css` folder.
-2. Create LESS/SASS/Stylus files and place them in the `app/styles` folder. If you choose this option, you are responsible for setting up a SASS/LESS compiler to watch this directory and compile to vanilla CSS, placing these CSS files into `assets/css`, whenever the file is saved. This will ensure all required CSS files are always present in `assets/css` for the build tool.
-
-Whichever styling process you choose, its important to keep the `assets/css/index.css` folder intact and use it as the master CSS file to import other files. This is because the build tools will follow all @include links, starting from `index.css`, and create one big index.css file when building a release version.
-
-Also included by default is `style.css`, which is taken from HTML5 Mobile Boilerplate. By default, this is the only file that is `@import`ed by `index.css`.
+In addition to `assets/css/index.css`, add any additional CSS files you need for branding, etc. As a rule of thumb, all core CSS should live in `index.css`, and any branding / device specific CSS which would be loaded dynamically should be included separately.
 
 ### Compass ###
 
@@ -169,17 +165,18 @@ There is already a `config.rb` file located in the root project folder, so there
 
 #### Creating style modules ####
 
-For each module, its best to create a separate SCSS file in `app/styles`. This file will contain all CSS needed for that module.
+For each module, its best to create a separate SCSS partial in `app/styles`. This file will contain all CSS needed for that module. Then, import all modules in the single `index.scss` file. This will allow Compass to compile the styles down to a single `index.css` file.
 
 The SCSS module will likely use Compass imports. It's usually best to place these imports into the `_base.scss` partial, rather than the module itself, and then just `@import 'base'` in your module. This keeps all common imports / functionality in one place.
 
 For example, you want to include rounded corners for your module `foo`:
 
-- Create `app/styles/foo.scss`
+- Create `app/styles/_foo.scss`
 - Add `@import 'compass/css3'` to `app/styles/_base.scss`
-- Add `@import 'base'` to `app/styles/foo.scss`
+- Add `@import 'base'` to `app/styles/_foo.scss`
+- Add `@import 'foo'` to `app/styles/index.scss`
 
-As `_base.scss` is a partial, the CSS3 module will be imported into `foo.scss`, so that the `@include border-radius` mixin can be used.
+As `_base.scss` is a partial, the CSS3 module will be imported into `_foo.scss`, so that the `@include border-radius` mixin can be used.
 
 #### Compiling ####
 
@@ -189,9 +186,7 @@ Use the Compass Watcher to compile on the fly:
 
 - From the project root folder, run `compass watch`.
 
-This will watch all files in `app/styles` and compile them to `assets/css`.
-
-*Remember to manually include each necessary CSS file in `assets/css/index.css`! `index.html` only references this CSS file, so any CSS needs to be `@import`ed here.*
+This will watch all partials in `app/styles` and compile them to `assets/css/index.css`.
 
 
 Images
