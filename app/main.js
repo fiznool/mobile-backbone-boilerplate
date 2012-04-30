@@ -13,12 +13,11 @@ define(function(require) {
     },
 
     index: function(hash) {
-      var view = new HelloWorld.Views.Main({
-        el: $("#main"),
+      this.changeView(new HelloWorld.Views.Main({
         model: new HelloWorld.Model()
-      });
-      view.render();
+      }));
     }
+
   });
 
   // Treat the jQuery ready function as the entry point to the application.
@@ -27,10 +26,13 @@ define(function(require) {
   $(function() {
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
-    var router = new Router();
+    var router = new Router({
+      // Define your container div where all content will be displayed.
+      container: $("#main")
+    });
 
-    // Trigger the initial route and enable HTML5 History API support
-    Backbone.history.start({ pushState: true });
+    // Trigger the initial route
+    Backbone.history.start();
   });
 
   // All navigation that is relative should be passed through the navigate
