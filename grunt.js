@@ -79,6 +79,7 @@ module.exports = function(grunt) {
       host: '0.0.0.0',
 
       debug: {
+        host: '0.0.0.0',
         folders: {
           "app": "dist/debug",
           "app/templates": "app/templates",
@@ -87,6 +88,7 @@ module.exports = function(grunt) {
       },
 
       release: {
+        host: '0.0.0.0',
         folders: {
           "app": "dist/release",
           "app/templates": "app/templates",
