@@ -15,6 +15,10 @@ define([
     }
   };
 
+  /*var  $ = tryNoConflict($),
+    _ = tryNoConflict(_),
+    Backbone = tryNoConflict(Backbone);
+*/
   // Provide Mustache-like syntax for templating.
   _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
@@ -113,9 +117,9 @@ define([
   
 
   return {
-    $: tryNoConflict($),
-    _: tryNoConflict(_),
-    backbone: tryNoConflict(Backbone)
+    $: $,
+    _: _,
+    backbone: Backbone
   };
 
 });

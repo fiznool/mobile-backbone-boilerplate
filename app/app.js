@@ -1,20 +1,31 @@
 define(function(require) {
   var      libs = require('core/libs'),
               $ = libs.$,
-       Backbone = libs.backbone;
-     HelloWorld = require('modules/helloworld/main');
+       Backbone = libs.backbone,
+     ButtonTest = require('modules/button-test/main'),
+    ListExample = require('modules/list-example/main'),
+  DetailExample = require('modules/detail-example/main');
 
  // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index",
-      ":hash": "index",
-      "*actions": "index"
+      "!/animals": "list",
+      "!/animals/:id": "detail",
+      "!/button": "button",
+      "*actions": "list"
     },
 
-    index: function(hash) {
-      this.changeView(new HelloWorld.Views.Main({
-        model: new HelloWorld.Model()
+    'button': function() {
+      this.changeView(new ButtonTest.Views.Main());
+    },
+
+    'list': function() {
+      this.changeView(new ListExample.Views.Main());
+    },
+
+    'detail': function(id) {
+      this.changeView(new DetailExample.Views.Main({
+        model: new DetailExample.Model({ id: id })
       }));
     }
 

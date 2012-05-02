@@ -76,6 +76,7 @@ module.exports = function(grunt) {
     //  until documentation has been written.
     server: {
       files: { "favicon.ico": "favicon.ico" },
+      folders: { "api": "api" },
       host: '0.0.0.0',
 
       debug: {

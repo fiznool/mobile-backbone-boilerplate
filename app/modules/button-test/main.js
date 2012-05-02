@@ -16,7 +16,7 @@ define(function(require) {
 
   var Views = {
     Main: Backbone.View.extend({
-      template: _.template(require('text!./tmpl.jst')),
+      template: _.template(require('text!./template.jst')),
 
       events: {
         // Respond to UI events, calling named functions in this object.
@@ -41,7 +41,7 @@ define(function(require) {
         // the view is rendered.
         // Example:
         // $(this.el).html(this.template(this.model.toJSON()));
-        this.model.set("timestamp", new Date());
+        this.model = new Model({"timestamp": new Date()});
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
       },
