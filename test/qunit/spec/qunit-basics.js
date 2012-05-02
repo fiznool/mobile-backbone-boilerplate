@@ -1,5 +1,5 @@
 define(function(require) {
-  var libs = require('libs'),
+  var libs = require('core/libs'),
          $ = libs.$;
          
   module ("QUnit Testing basics");

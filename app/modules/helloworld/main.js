@@ -1,11 +1,13 @@
 define(function(require) {
-  var      libs = require('libs'),
+  var      libs = require('core/libs'),
               $ = libs.$,
               _ = libs._,
        Backbone = libs.backbone;
   
   var Model = Backbone.Model.extend({
-    
+    defaults: {
+      "hello": "world"
+    }
   });
 
   var Collection = Backbone.Collection.extend({
@@ -14,7 +16,7 @@ define(function(require) {
 
   var Views = {
     Main: Backbone.View.extend({
-      template: _.template(require('text!templates/helloworld.html')),
+      template: _.template(require('text!./tmpl.jst')),
 
       events: {
         // Respond to UI events, calling named functions in this object.

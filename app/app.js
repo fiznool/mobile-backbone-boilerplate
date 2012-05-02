@@ -1,8 +1,8 @@
 define(function(require) {
-  var      libs = require('libs'),
+  var      libs = require('core/libs'),
               $ = libs.$,
        Backbone = libs.backbone;
-     HelloWorld = require('modules/helloworld');
+     HelloWorld = require('modules/helloworld/main');
 
  // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
