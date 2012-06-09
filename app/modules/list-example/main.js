@@ -1,8 +1,7 @@
 define(function(require) {
-  var      libs = require('core/libs'),
-              $ = libs.$,
-              _ = libs._,
-       Backbone = libs.backbone;
+  var $ = require('jquery');
+  var _ = require('underscore');
+  var Backbone = require('backbone');
   
   var Model = Backbone.Model.extend({
     defaults: {
@@ -56,6 +55,10 @@ define(function(require) {
 
       addAll: function() {
         this.collection.each(this.addOne, this);
+      },
+
+      onClose: function() {
+        console.log('Cleared up view');
       }
 
     }),

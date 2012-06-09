@@ -1,10 +1,10 @@
 // A skeleton module, duplicate and customise for your own module.
 
 define(function(require) {
-  var      libs = require('libs'),
-              $ = libs.$,
-              _ = libs._,
-       Backbone = libs.backbone;
+  
+  var $ = require('jquery');
+  var _ = require('underscore');
+  var Backbone = require('backbone');
   
   var Model = Backbone.Model.extend({ /* your model here */ });
 

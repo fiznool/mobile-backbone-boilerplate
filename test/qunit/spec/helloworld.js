@@ -1,8 +1,7 @@
 define(function(require) {
 
-  var       libs = require('core/libs'),
-               $ = libs.$,
-      HelloWorld = require('modules/button-test/main');
+  var $ = require('jquery');
+  var HelloWorld = require('modules/button-test/main');
 
   module("HelloWorld Backbone Model");
 

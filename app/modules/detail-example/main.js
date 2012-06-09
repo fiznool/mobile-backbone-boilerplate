@@ -1,8 +1,8 @@
 define(function(require) {
-  var      libs = require('core/libs'),
-              $ = libs.$,
-              _ = libs._,
-       Backbone = libs.backbone;
+  
+  var $ = require('jquery');
+  var _ = require('underscore');
+  var Backbone = require('backbone');
   
   var Model = Backbone.Model.extend({
     url: function() {

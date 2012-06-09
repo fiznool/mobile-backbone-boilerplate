@@ -12,8 +12,8 @@ This boilerplate provides a starting point to build single-page mobile web apps,
 - [Backbone.js](http://documentcloud.github.com/backbone/) to provide an MVC-ish structure to your app.
 - [RequireJS](http://requirejs.org) to organise your project into loosly coupled, highly testable modules.
 - [RequireJS text plugin](http://requirejs.org/docs/api.html#text) combined with [Underscore templating](http://documentcloud.github.com/underscore/#template) with a [Mustache-like syntax](https://gist.github.com/2169509) to separate HTML views into individual template snippets.
+- [RequireJS shim](https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#wiki-shim) to support the loading of libraries that are non-AMD compatible (here's looking at you, Underscore and Backbone).
 - [Almond.js](https://github.com/jrburke/almond), a stripped down version of RequireJS which can be used in place of RequireJS in a production environment.
-- [Library Bootstrapping](http://fiznool.com/post/18436104594/bootstrapping-your-libs-with-requirejs) using a `libs.js` file, which defines any pre-requisites for libraries before they are required.
 - [QUnit](http://docs.jquery.com/QUnit) JavaScript unit testing tool.
 - [Grunt](https://github.com/cowboy/grunt) to lint, test, concatenate and minify the app, ready for deployment.
 - [Compass](http://compass-style.org/) to simplify styling.
@@ -37,17 +37,16 @@ are already included here. Place all new JavaScript libraries inside the
 ├── app
 │   ├── core          // Core files, shared by the modules in the app live here.
 │   │   ├── style     // Core styles live here.
-│   │   └── libs.js   // Wrapper for JS libs for bootstrapping, see below for more details.
 │   ├── modules       // Each individual module lives in here. A module comprises an HTML template, styles and a JS controller.
 │   │   └── _skeleton.js  // A bare-bones starting point for building your JS module.
 │   ├── app.js        // App entry point, defines global router and sets up views.
 │   ├── app.scss      // Master stylesheet, responsible for importing module styles.
-│   ├── config.js     // RequireJS entry point. Sets up common paths and loads app.js.
+│   ├── config.js     // RequireJS entry point. Sets up common paths, loads non-AMD libraries and loads app.js.
 ├── assets
 │   ├── css
 │   ├── img
 │   └── js
-│       ├── libs      // Place new JS libs in here, reference in libs.js.
+│       ├── libs      // Place new JS libs in here, reference in config.js.
 │       └── plugins
 ├── config.rb         // Config file used by Compass.
 ├── favicon.ico
@@ -113,14 +112,13 @@ Each module should have a respective *test module* which is responsible for unit
 
 ####Libraries####
 
-This project includes Zepto, Backbone, Underscore, RequireJS + text plugin, and Almond.js.
+This project includes Zepto, Backbone, Underscore, RequireJS + text plugin, Almond.js, Modernizr and Energize.
 
-Patches have been made to the following libraries, so that they operate correctly in an AMD/RequireJS environment:
+The latter two are included as normal in `index.html`. The rest are loaded in when needed with RequireJS.
 
-- Backbone and Underscore are AMD-aware versions of these libraries, grabbed from [the AMD JS Github repository](https://github.com/amdjs).
-- Zepto is not AMD-aware by default. Extra lines have been added to this library to enable AMD loading. [See the modified source](https://github.com/fiznool/Backbone-Boilerplate/blob/master/assets/js/libs/zepto-amd-custom-0.8.0.js#L508) for more details.
+Those libraries which do not support AMD loading (currently Zepto, Underscore and Backbone) are loaded using the RequireJS `shim` configuration. This allows them to be requested as normal, converting them into forms that can be `require()`d.
 
-Modules which require a library to operate do not `require()` them directly. Instead, a `libs.js` proxy is used to require. This is so that libraries can first be bootstrapped with configuration information, and can be removed from the global scope. See [this blog post](http://fiznool.com/post/18436104594/bootstrapping-your-libs-with-requirejs) for more details on this.
+The `shim` directive is new to RequireJS 2.0, and replaces the old method of [bootstrapping libs](http://fiznool.com/post/18436104594/bootstrapping-your-libs-with-requirejs).
 
 ##### Almond.js #####
 RequireJS is great for modularising your codebase, which makes development easier, promotes loose coupling and separates units of code into highly testable modules. Win!

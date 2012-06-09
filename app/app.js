@@ -1,10 +1,10 @@
 define(function(require) {
-  var      libs = require('core/libs'),
-              $ = libs.$,
-       Backbone = libs.backbone,
-     ButtonTest = require('modules/button-test/main'),
-    ListExample = require('modules/list-example/main'),
-  DetailExample = require('modules/detail-example/main');
+  
+  var $ = require('jquery');
+  var Backbone = require('backbone');
+  var ButtonTest = require('modules/button-test/main');
+  var ListExample = require('modules/list-example/main');
+  var DetailExample = require('modules/detail-example/main');
 
  // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({

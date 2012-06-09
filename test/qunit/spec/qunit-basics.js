@@ -1,6 +1,5 @@
 define(function(require) {
-  var libs = require('core/libs'),
-         $ = libs.$;
+  var $ = require('jquery');
          
   module ("QUnit Testing basics");
 

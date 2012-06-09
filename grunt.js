@@ -46,10 +46,10 @@ module.exports = function(grunt) {
 
     // This task uses the MinCSS Node.js project to take all your CSS files in
     // order and concatenate them into a single CSS file named index.css.  It
-    // also minifies all the CSS as well.  This is named index.css, because we
+    // also minifies all the CSS as well.  This is named app.css, because we
     // only want to load one stylesheet in index.html.
     mincss: {
-      "dist/release/index.css": [
+      "dist/release/app.css": [
         "assets/css/**/*.css"
       ]
     },
@@ -83,6 +83,7 @@ module.exports = function(grunt) {
         host: '0.0.0.0',
         folders: {
           "app": "dist/debug",
+          "api": "api",
           "app/templates": "app/templates",
           "assets/js/libs": "dist/debug"
         }
@@ -92,6 +93,7 @@ module.exports = function(grunt) {
         host: '0.0.0.0',
         folders: {
           "app": "dist/release",
+          "api": "api",
           "app/templates": "app/templates",
           "assets/js/libs": "dist/release",
           "assets/css": "dist/release"
