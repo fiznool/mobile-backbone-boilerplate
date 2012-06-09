@@ -137,9 +137,9 @@ See JSHint's [Platforms page](http://www.jshint.com/platforms/) for more info on
 
 ###Templates###
 
-The enry point for the app is `index.html`, responsible for setting up initial styles, meta information and then loading the app using RequireJS.
+The entry point for the app is `index.html`, responsible for setting up initial styles, meta information and then loading the app using RequireJS.
 
-Each page in the app is written as a Backbone/RequireJS module. Markup is injected into these modules using HTML templates. These should be stored in the same directoryas the module, using the *.jst* suffix (JavaScript Template).
+Each page in the app is written as a Backbone/RequireJS module. Markup is injected into these modules using HTML templates. These should be stored in the same directory as the module, using the *.jst* suffix (JavaScript Template).
 
 ###Stylesheets###
 
@@ -227,10 +227,10 @@ All commands are prefixed with `bbb` in your terminal.  For example the command
 $ bbb server
 ```
 
-###`bbb server`###
+####`bbb server`####
 Runs an embedded development server which serves up your web application, so it can be viewed in a local browser.
 
-###`bbb server:qunit`###
+####`bbb server:qunit`####
 Runs an embedded server which serves up your QUnit test page, so it can be viewed in a local browser.
 
 ####`bbb debug`####
@@ -246,7 +246,7 @@ This places a single concatenated JS file at `dist/debug/require.js`. Naming the
 
 Serves up the web application, using the single concatenated file created with a previous call to `bbb debug`, instead of the individual JS files in the `app/` and `assets/js/libs` directories. Internally, this rewrites  `assets/js/libs/require.js` to `dist/debug/require.js`, so that the index.html file loads the concatenated file rather than using the real RequireJS library.
 
-###`bbb release`###
+####`bbb release`####
 
 Identical to `bbb debug` except:
 
@@ -258,12 +258,12 @@ Identical to `bbb debug` except:
 
 Identical to `bbb server:debug`, except it uses the files in `dist/release` instead of `dist/debug`.
 
-###`bbb preflight`###
+####`bbb preflight`####
 Lints your code and runs your tests in a headless environment. Very useful to check if your code is ready to be checked in to version control.
 
 Note this needs PhantomJS to be installed, in order to run.
 
-###`bbb qunit`###
+####`bbb qunit`####
 Runs your tests only in a headless environment. This automates your unit tests, so you don't have to keep browsing to the QUnit web page to check test results.
 
 Note this needs PhantomJS to be installed, in order to run.
