@@ -50,7 +50,6 @@ define(function(require) {
         var view = new Views.Item({ model: item });
         view.render();
         $(this.el).find('ul').append(view.el);
-        console.log(this.el);
       },
 
       addAll: function() {

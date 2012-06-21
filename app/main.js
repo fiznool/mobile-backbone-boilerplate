@@ -1,35 +1,8 @@
 define(function(require) {
   
   var $ = require('jquery');
-  var Backbone = require('backbone');
-  var ButtonTest = require('modules/button-test/main');
-  var ListExample = require('modules/list-example/main');
-  var DetailExample = require('modules/detail-example/main');
-
- // Defining the application router, you can attach sub routers here.
-  var Router = Backbone.Router.extend({
-    routes: {
-      "!/animals": "list",
-      "!/animals/:id": "detail",
-      "!/button": "button",
-      "*actions": "list"
-    },
-
-    'button': function() {
-      this.changeView(new ButtonTest.Views.Main());
-    },
-
-    'list': function() {
-      this.changeView(new ListExample.Views.Main());
-    },
-
-    'detail': function(id) {
-      this.changeView(new DetailExample.Views.Main({
-        model: new DetailExample.Model({ id: id })
-      }));
-    }
-
-  });
+  var app = require('app');
+  var Router = require('router');
 
   // Treat the jQuery ready function as the entry point to the application.
   // Inside this function, kick-off all initialization, everything up to this
@@ -37,7 +10,7 @@ define(function(require) {
   $(function() {
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
-    var router = new Router({
+    app.router = new Router({
       // Define your container div where all content will be displayed.
       container: $("#main")
     });

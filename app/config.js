@@ -131,6 +131,7 @@ require.config({
       }
     }
   }
+
 });
 
 require(["main"]);
