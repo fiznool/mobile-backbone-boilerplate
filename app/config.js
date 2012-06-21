@@ -4,7 +4,7 @@ require.config({
   paths: {
     
     // Libraries
-    jquery:     '../assets/js/libs/zepto-1.0rc1', // Named jquery so that modules don't have to change their require() calls
+    jquery:     '../assets/js/libs/jquery-1.7.2', // Can switch to Zepto if we don't need WP7 support
     underscore: '../assets/js/libs/underscore-1.3.1',
     backbone:   '../assets/js/libs/backbone-0.9.2',
     text:       '../assets/js/plugins/text-1.0.7',
@@ -16,12 +16,14 @@ require.config({
 
   shim: {
 
+    /*
     jquery: {
       exports: function() {
-        // We are using Zepto. Pull this out if we replace with jQuery as it is AMD compatible
+        // If we are using Zepto this is important, as Zepto is not AMD compliant.
         return this.Zepto;
       }
     },
+    */
 
     underscore: {
       exports: function() {
