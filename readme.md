@@ -200,7 +200,9 @@ Image files should be placed in `assets/img`.
 Running Development Server
 --------------------------
 
-To serve up the application so it can be viewed in a browser, run the command `bbb server`. Your app can be viewed at http://localhost:8000.
+To serve up the application so it can be viewed in a browser, you can use the associated `bbb` build tools. 
+
+See the next section for installing `bbb`. Once this is installed, run the command `bbb server`. Your app can be viewed at http://localhost:8000.
 
 Build Scripts
 -------------
