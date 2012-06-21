@@ -39,9 +39,9 @@ are already included here. Place all new JavaScript libraries inside the
 │   │   ├── style     // Core styles live here.
 │   ├── modules       // Each individual module lives in here. A module comprises an HTML template, styles and a JS controller.
 │   │   └── _skeleton.js  // A bare-bones starting point for building your JS module.
-│   ├── app.js        // App entry point, defines global router and sets up views.
+│   ├── main.js        // App entry point, defines global router and sets up views.
 │   ├── app.scss      // Master stylesheet, responsible for importing module styles.
-│   ├── config.js     // RequireJS entry point. Sets up common paths, loads non-AMD libraries and loads app.js.
+│   ├── config.js     // RequireJS entry point. Sets up common paths, loads non-AMD libraries and loads main.js.
 ├── assets
 │   ├── css
 │   ├── img
@@ -94,7 +94,7 @@ PageView
 └── FooterView
 ```
 
-Each page (screen) has its own module, and the collection of modules makes up the entire app. The master Router in `app.js` links together all PageViews and handles routing between each.
+Each page (screen) has its own module, and the collection of modules makes up the entire app. The master Router in `main.js` links together all PageViews and handles routing between each.
 
 A helper js file, `_skeleton.js` is available to use as a base for creating your JS module. Simply duplicate this file into the `modules/<module_name>` directory, to use it as a starting point.
 
@@ -143,12 +143,12 @@ Each page in the app is written as a Backbone/RequireJS module. Markup is inject
 
 ###Stylesheets###
 
-This project expects a single master CSS file at `assets/css/app.css` for styling. You have two options to create this CSS file:
+This project expects a single master CSS file at `assets/css/index.css` for styling. You have two options to create this CSS file:
 
-1. Create 'vanilla' CSS files by hand and save them into the `assets/css` folder. For each CSS file, add a `@import` statement manually into `assets/css/app.css`.
-2. Create LESS/SASS/Stylus files and place them in the module folder. If you choose this option, you are responsible for setting up a SASS/LESS compiler to watch this directory and compile the lot into the file `assets/css/app.css`, whenever the file is saved.
+1. Create 'vanilla' CSS files by hand and save them into the `assets/css` folder. For each CSS file, add a `@import` statement manually into `assets/css/index.css`.
+2. Create LESS/SASS/Stylus files and place them in the module folder. If you choose this option, you are responsible for setting up a SASS/LESS compiler to watch this directory and compile the lot into the file `assets/css/index.css`, whenever the file is saved.
 
-In addition to `assets/css/app.css`, add any additional CSS files you need for branding, etc. As a rule of thumb, all core CSS should live in `app.css`, and any branding / device specific CSS which would be loaded dynamically should be included separately.
+In addition to `assets/css/index.css`, add any additional CSS files you need for branding, etc. As a rule of thumb, all core CSS should live in `index.css`, and any branding / device specific CSS which would be loaded dynamically should be included separately.
 
 #### Compass ####
 
@@ -168,7 +168,7 @@ There is already a `config.rb` file located in the root project folder, so there
 
 ##### Creating style modules #####
 
-For each module, its best to create a separate SCSS partial in the module folder. This file will contain all CSS needed for that module. Then, import all modules in the single `app.scss` file. This will allow Compass to compile the styles down to a single `app.css` file.
+For each module, its best to create a separate SCSS partial in the module folder. This file will contain all CSS needed for that module. Then, import all modules in the single `app.scss` file. This will allow Compass to compile the styles down to a single `index.css` file.
 
 The SCSS module will likely use Compass imports. It's usually best to place these imports into the `_base.scss` partial, rather than the module itself, and then just `@import 'core/style/base'` in your module. This keeps all common imports / functionality in one place.
 
@@ -189,7 +189,7 @@ Use the Compass Watcher to compile on the fly:
 
 - From the project root folder, run `compass watch`.
 
-This will watch all partials in `app/modules` and compile them to `assets/css/app.css`.
+This will watch all partials in `app/modules` and compile them to `assets/css/index.css`.
 
 
 Images
@@ -238,7 +238,7 @@ Builds a debug version of the web app by carrying out the following tasks:
 
 - Lints the JavaScript code using JSHint. Its probably best to install a JSHint plugin for your text editor to catch these syntax errors as you type
 - Runs through all tests defined in `test/qunit/spec.js`, using PhantomJS.
-- Concatenates all JavaScript files required by `app/app.js`, recursively. This will recurse through all dependencies and concatenate the lot into one JS file - typically, this will include all modules and js files in `app/`, and the libraries required by the modules in `assets/js/libs/`. Note that the concatenated file also includes `assets/js/libs/almond.js` as a drop-in replacement for RequireJS.
+- Concatenates all JavaScript files required by `app/main.js`, recursively. This will recurse through all dependencies and concatenate the lot into one JS file - typically, this will include all modules and js files in `app/`, and the libraries required by the modules in `assets/js/libs/`. Note that the concatenated file also includes `assets/js/libs/almond.js` as a drop-in replacement for RequireJS.
 
 This places a single concatenated JS file at `dist/debug/require.js`. Naming the JS file `require.js` allows the regular `index.html` file to be used without any modifications. Serve up this file instead of the individual modules by running...
 
