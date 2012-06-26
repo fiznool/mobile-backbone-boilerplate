@@ -1,5 +1,5 @@
 define(function(require) {
-  
+
   var $ = require('jquery');
   var app = require('app');
   var Router = require('router');
@@ -12,7 +12,7 @@ define(function(require) {
     // navigation from this instance.
     app.router = new Router({
       // Define your container div where all content will be displayed.
-      container: $("#main")
+      container: $("#iscrollinner")
     });
 
     // Trigger the initial route

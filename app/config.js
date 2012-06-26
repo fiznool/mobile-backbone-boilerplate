@@ -1,17 +1,19 @@
 // Set the require.js configuration for your application.
 require.config({
-  
+
   paths: {
-    
+
     // Libraries
     jquery:     '../assets/js/libs/jquery-1.7.2', // Can switch to Zepto if we don't need WP7 support
     underscore: '../assets/js/libs/underscore-1.3.1',
     backbone:   '../assets/js/libs/backbone-0.9.2',
     text:       '../assets/js/plugins/text-1.0.7',
-    
+    iscroll:    '../assets/js/libs/iscroll-lite-4.1.6',
+    layoutType: '../assets/js/layoutType',
+
     // helpers
     core:       'core/'
-    
+
   },
 
   shim: {
@@ -25,6 +27,12 @@ require.config({
     },
     */
 
+    iscroll: {
+      exports: function() {
+        return this.iScroll;
+      }
+    },
+
     underscore: {
       exports: function() {
         this._.templateSettings = {
@@ -36,13 +44,19 @@ require.config({
     },
 
     backbone: {
-      deps: ["underscore", "jquery"],
-      exports: function(_, $) {
+      deps: ["underscore", "jquery", "layoutType", "iscroll"],
+      exports: function(_, $, layoutType, iScroll) {
         // Extend Backbone to clear up Views when they are removed.
         // This ensures we don't get memory leaks. :)
         // Much love to these resources:
         //  http://lostechies.com/derickbailey/2011/12/12/composite-js-apps-regions-and-region-managers/
         //  http://stackoverflow.com/questions/7567404/backbone-js-repopulate-or-recreate-the-view/7607853#7607853
+
+        var pageScroller = null;
+
+        layoutType = layoutType();
+        document.documentElement.className += ' ' + layoutType;
+        document.getElementById('appheader').innerHTML = layoutType;
         _.extend(this.Backbone.View.prototype, {
 
           // Use this function to bind any model/collection events.
@@ -51,7 +65,7 @@ require.config({
           bindTo: function(obj, evt, callback) {
             // TODO handle non-Backbone object?
             obj.bind(evt, callback, this);
-            
+
             if (!this.bindings) {
               this.bindings = [];
             }
@@ -71,7 +85,7 @@ require.config({
               });
               this.bindings = null;
             }
-            
+
           },
 
           // Completely removes the view from the DOM
@@ -114,6 +128,7 @@ require.config({
           // destroying the old view in the process.
           // TODO look into how to handle transition here!
           changeView: function(newView) {
+            var containerEl = this.container instanceof $ ? this.container[0] : this.container;
             if (this.currentView){
               this.currentView.dispose();
             }
@@ -125,8 +140,17 @@ require.config({
             this.currentView.render();
             $(this.container).html(this.currentView.el);
 
-          }
 
+            if(layoutType === 'iscroll') {
+              if(!pageScroller) {
+                pageScroller = new iScroll(containerEl.parentNode);
+                $(window).on('orientationchange resize', function() {
+                  setTimeout(function() { pageScroller.refresh(); }, 200);
+                });
+              }
+              setTimeout(function() { pageScroller.refresh(); }, 200);
+            }
+          }
         });
 
         return this.Backbone;
