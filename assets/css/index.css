@@ -560,78 +560,84 @@ textarea[contenteditable] {
     page-break-after: avoid;
   }
 }
-/* line 10, ../../app/core/style/_base.scss */
+/* line 9, ../../app/core/style/_base.scss */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 17, ../../app/core/style/_base.scss */
+#appwrapper {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+/* line 24, ../../app/core/style/_base.scss */
 #appheader {
+  top: 0;
   height: 44px;
   width: 100%;
   background-color: #aaa;
+  z-index: 1;
 }
 
-/* line 16, ../../app/core/style/_base.scss */
+/* line 32, ../../app/core/style/_base.scss */
 #appfooter {
+  bottom: 0;
   height: 40px;
   width: 100%;
   background-color: #aaa;
+  z-index: 1;
 }
 
-/* line 22, ../../app/core/style/_base.scss */
+/* line 40, ../../app/core/style/_base.scss */
 #main {
   width: 96%;
   overflow-x: hidden;
   margin: 0 2%;
 }
 
-/* line 30, ../../app/core/style/_base.scss */
+/* line 49, ../../app/core/style/_base.scss */
 .positionfixed body {
-  height: 100%;
-  width: 100%;
   overflow: auto;
 }
-/* line 36, ../../app/core/style/_base.scss */
-.positionfixed #appheader {
+/* line 53, ../../app/core/style/_base.scss */
+.positionfixed #appheader, .positionfixed #appfooter {
   position: fixed;
-  top: 0;
-  z-index: 1;
 }
-/* line 42, ../../app/core/style/_base.scss */
-.positionfixed #appfooter {
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-}
-/* line 48, ../../app/core/style/_base.scss */
-.positionfixed #main {
+/* line 57, ../../app/core/style/_base.scss */
+.positionfixed #main, .positionfixed #appcontent {
   position: relative;
+}
+/* line 61, ../../app/core/style/_base.scss */
+.positionfixed #main {
   padding-top: 44px;
   padding-bottom: 40px;
 }
 
-/* line 56, ../../app/core/style/_base.scss */
+/* line 69, ../../app/core/style/_base.scss */
 .overflowscroll body, .polyfillscroll body {
-  height: 100%;
-  width: 100%;
   overflow: hidden;
 }
-/* line 62, ../../app/core/style/_base.scss */
-.overflowscroll #appheader, .polyfillscroll #appheader {
+/* line 73, ../../app/core/style/_base.scss */
+.overflowscroll #appheader, .overflowscroll #appfooter, .overflowscroll #main, .overflowscroll #appcontent, .polyfillscroll #appheader, .polyfillscroll #appfooter, .polyfillscroll #main, .polyfillscroll #appcontent {
   position: absolute;
-  top: 0;
 }
-/* line 67, ../../app/core/style/_base.scss */
-.overflowscroll #appfooter, .polyfillscroll #appfooter {
-  position: absolute;
-  bottom: 0;
-}
-/* line 72, ../../app/core/style/_base.scss */
+/* line 77, ../../app/core/style/_base.scss */
 .overflowscroll #main, .polyfillscroll #main {
-  position: absolute;
   top: 44px;
   bottom: 40px;
-  overflow-x: hidden;
   overflow-y: scroll;
 }
-/* line 80, ../../app/core/style/_base.scss */
-.overflowscroll #appcontent, .polyfillscroll #appcontent {
+
+/* line 86, ../../app/core/style/_base.scss */
+.inline #main {
+  padding-bottom: 40px;
+}
+/* line 90, ../../app/core/style/_base.scss */
+.inline #appfooter {
   position: absolute;
 }
 
