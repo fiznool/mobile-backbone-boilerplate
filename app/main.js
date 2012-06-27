@@ -12,7 +12,7 @@ define(function(require) {
     // navigation from this instance.
     app.router = new Router({
       // Define your container div where all content will be displayed.
-      container: $("#iscrollinner")
+      container: $("#appcontent")
     });
 
     // Trigger the initial route

@@ -9,8 +9,7 @@ require.config({
     backbone:   '../assets/js/libs/backbone-0.9.2',
     text:       '../assets/js/plugins/text-1.0.7',
     iscroll:    '../assets/js/libs/iscroll-lite-4.1.6',
-    layoutType: '../assets/js/layoutType',
-
+    
     // helpers
     core:       'core/'
 
@@ -44,8 +43,8 @@ require.config({
     },
 
     backbone: {
-      deps: ["underscore", "jquery", "layoutType", "iscroll"],
-      exports: function(_, $, layoutType, iScroll) {
+      deps: ["underscore", "jquery", "core/device", "iscroll"],
+      exports: function(_, $, device, iScroll) {
         // Extend Backbone to clear up Views when they are removed.
         // This ensures we don't get memory leaks. :)
         // Much love to these resources:
@@ -54,9 +53,8 @@ require.config({
 
         var pageScroller = null;
 
-        layoutType = layoutType();
-        document.documentElement.className += ' ' + layoutType;
-        document.getElementById('appheader').innerHTML = layoutType;
+        document.documentElement.className += ' ' + device.scroll;
+        document.getElementById('appheader').innerHTML = device.scroll;
         _.extend(this.Backbone.View.prototype, {
 
           // Use this function to bind any model/collection events.
@@ -141,7 +139,7 @@ require.config({
             $(this.container).html(this.currentView.el);
 
 
-            if(layoutType === 'iscroll') {
+            if(device.scroll === 'polyfillscroll') {
               if(!pageScroller) {
                 pageScroller = new iScroll(containerEl.parentNode);
                 $(window).on('orientationchange resize', function() {

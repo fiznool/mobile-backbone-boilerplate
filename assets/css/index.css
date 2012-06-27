@@ -390,10 +390,7 @@ td {
 }
 /*/mediaquery*/
 /* iPhone 4, Opera Mobile 11 and other high pixel ratio devices ----------- */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (-o-min-device-pixel-ratio: 3/2),
-only screen and (min--moz-device-pixel-ratio: 1.5),
-only screen and (min-device-pixel-ratio: 1.5) {
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
   /* Styles */
 }
 /* ==|== non-semantic helper classes ========================================
@@ -563,24 +560,93 @@ textarea[contenteditable] {
     page-break-after: avoid;
   }
 }
-/* line 3, ../../app/modules/button-test/_style.scss */
-body {
-  margin-left: 1em;
+/* line 10, ../../app/core/style/_base.scss */
+#appheader {
+  height: 44px;
+  width: 100%;
+  background-color: #aaa;
 }
 
-/* line 7, ../../app/modules/button-test/_style.scss */
+/* line 16, ../../app/core/style/_base.scss */
+#appfooter {
+  height: 40px;
+  width: 100%;
+  background-color: #aaa;
+}
+
+/* line 22, ../../app/core/style/_base.scss */
+#main {
+  width: 96%;
+  overflow-x: hidden;
+  margin: 0 2%;
+}
+
+/* line 30, ../../app/core/style/_base.scss */
+.positionfixed body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+/* line 36, ../../app/core/style/_base.scss */
+.positionfixed #appheader {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+/* line 42, ../../app/core/style/_base.scss */
+.positionfixed #appfooter {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+/* line 48, ../../app/core/style/_base.scss */
+.positionfixed #main {
+  position: relative;
+  padding-top: 44px;
+  padding-bottom: 40px;
+}
+
+/* line 56, ../../app/core/style/_base.scss */
+.overflowscroll body, .polyfillscroll body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+/* line 62, ../../app/core/style/_base.scss */
+.overflowscroll #appheader, .polyfillscroll #appheader {
+  position: absolute;
+  top: 0;
+}
+/* line 67, ../../app/core/style/_base.scss */
+.overflowscroll #appfooter, .polyfillscroll #appfooter {
+  position: absolute;
+  bottom: 0;
+}
+/* line 72, ../../app/core/style/_base.scss */
+.overflowscroll #main, .polyfillscroll #main {
+  position: absolute;
+  top: 44px;
+  bottom: 40px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+/* line 80, ../../app/core/style/_base.scss */
+.overflowscroll #appcontent, .polyfillscroll #appcontent {
+  position: absolute;
+}
+
+/* line 3, ../../app/modules/button-test/_style.scss */
 #main h1 {
   color: #111111;
 }
 
-/* line 11, ../../app/modules/button-test/_style.scss */
+/* line 7, ../../app/modules/button-test/_style.scss */
 #button-target {
   width: 10em;
   height: 4em;
-  -moz-border-radius: 0.5em;
   -webkit-border-radius: 0.5em;
-  -o-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
   -ms-border-radius: 0.5em;
-  -khtml-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
   border-radius: 0.5em;
 }

@@ -2,3 +2,84 @@
 @import "compass/css3";
 @import "blueprint/colors";
 @import "mbp";
+
+$appheader-size: 44px;
+$appfooter-size: 40px;
+
+// Toolbar
+#appheader {
+	height: $appheader-size;
+	width: 100%;
+  background-color: #aaa;
+}
+
+#appfooter {
+	height: $appfooter-size;
+	width: 100%;
+  background-color: #aaa;
+}
+
+#main {
+  width: 96%;
+  overflow-x: hidden;
+  margin: 0 2%;
+}
+
+// Fixed toolbar positioning
+.positionfixed {
+	body { 
+		height: 100%; 
+		width: 100%;
+    overflow: auto;
+	}
+	
+	#appheader {
+		position: fixed;
+		top: 0;
+		z-index: 1;
+	}
+
+	#appfooter {
+		position: fixed;
+		bottom: 0;
+		z-index: 1;
+	}
+
+	#main {
+		position: relative;
+		padding-top: $appheader-size;
+		padding-bottom: $appfooter-size;
+	}
+}
+
+.overflowscroll, .polyfillscroll {
+  body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  #appheader {
+    position: absolute;
+    top: 0;
+  }
+
+  #appfooter {
+    position: absolute;
+    bottom: 0;
+  }
+
+  #main {
+    position: absolute;
+    top: $appheader-size;
+    bottom: $appfooter-size;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  #appcontent {
+    position: absolute;
+  }
+
+}
+
