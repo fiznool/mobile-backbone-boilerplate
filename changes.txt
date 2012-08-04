@@ -1,6 +1,0 @@
- - Backbone Zombie Nation + other plugins
- - Scaffold.js
- - Mediator.js
- - Reduce app.js
- - Eliminate dependency on bbb (just use grunt)
- - scroller, orientation
