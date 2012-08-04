@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     // https://github.com/cowboy/grunt/blob/master/docs/task_lint.md
     lint: {
       files: [
-        "build/config.js", "app/**/*.js"
+        "app/**/*.js"
       ]
     },
 
@@ -113,13 +113,13 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
       // Include the main configuration file
-      mainConfigFile: "app/config.js",
+      mainConfigFile: "app/scripts/bootstrap.js",
 
       // Output file
       out: "dist/debug/require.js",
 
       // Root application module
-      name: "config",
+      name: "bootstrap",
 
       // Do not wrap everything in an IIFE
       wrap: false

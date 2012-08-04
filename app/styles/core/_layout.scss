@@ -1,0 +1,90 @@
+@import "base";
+
+$appheader-size: 44px;
+$appfooter-size: 40px;
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+// Toolbar CSS
+// Supports position:fixed, overflow:scroll, iscroll polyfill and static fallback
+
+#appwrapper {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+#appheader {
+  top: 0;
+	height: $appheader-size;
+	width: 100%;
+  background-color: #aaa;
+  z-index: 1;
+}
+
+#appfooter {
+  bottom: 0;
+  height: $appfooter-size;
+	width: 100%;
+  background-color: #aaa;
+  z-index: 1;
+}
+
+#main {
+  width: 96%;
+  overflow-x: hidden;
+  margin: 0 2%;
+}
+
+
+// Fixed toolbar positioning
+.positionfixed {
+	body { 
+		overflow: auto;
+	}
+	
+	#appheader, #appfooter {
+		position: fixed;
+	}
+
+	#main, #appcontent {
+    position: relative;
+	}
+
+  #main {
+    padding-top: $appheader-size;
+    padding-bottom: $appfooter-size;
+  }
+}
+
+// Overflow scroll uses position:absolute
+.overflowscroll, .polyfillscroll {
+  body {
+    overflow: hidden;
+  }
+
+  #appheader, #appfooter, #main, #appcontent {
+    position: absolute;
+  }
+
+  #main {
+    top: $appheader-size;
+    bottom: $appfooter-size;
+    overflow-y: scroll;
+  }
+
+}
+
+.inline {
+  #main {
+    padding-bottom: $appfooter-size;
+  }
+  
+  #appfooter {
+    position: absolute;
+  }
+}

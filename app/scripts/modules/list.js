@@ -1,30 +1,46 @@
 define(function(require) {
   var $ = require('jquery');
   var _ = require('underscore');
-  var Backbone = require('backbone');
-  
-  var Model = Backbone.Model.extend({
-    defaults: {
-      "id": null,
-      "name": "Animal"
-    }
-  });
+  var Scaffold = require('scaffold');
 
-  var Collection = Backbone.Collection.extend({
-    model: Model,
-    url: '/api/animals.json'
-  });
+  var Item = (function() {
 
-  var animals = new Collection();
+    return Scaffold.View.extend({
 
-  var Views = {
-    Main: Backbone.View.extend({
+      tagName: 'li',
+
+      template: _.template(require('text!templates/item.jst')),
+
+      render: function() {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+      }
+
+    });
+
+  })();
+
+
+  var List = (function() {
+
+    var Model = Scaffold.Model.extend({
+      defaults: {
+        "id": null,
+        "name": "Animal"
+      }
+    });
+
+    var Collection = Scaffold.Collection.extend({
+      model: Model,
+      url: '/api/animals.json'
+    });
+
+    return Scaffold.View.extend({
+
       tagName: 'nav',
 
-      template: _.template(require('text!./template.jst')),
+      template: _.template(require('text!templates/list.jst')),
 
-      collection: animals,
-      
       events: {
         // Respond to UI events, calling named functions in this object.
         // These events will automatically be cleaned up when the view is hidden.
@@ -34,6 +50,8 @@ define(function(require) {
       },
 
       initialize: function() {
+        this.collection = new Collection();
+
         this.bindTo(this.collection, 'add', this.addOne);
         this.bindTo(this.collection, 'reset', this.addAll);
         
@@ -47,42 +65,23 @@ define(function(require) {
       },
 
       addOne: function(item) {
-        var view = new Views.Item({ model: item });
+        var view = new Item({ model: item });
         view.render();
         $(this.el).find('ul').append(view.el);
+        this.addChild(view);
       },
 
       addAll: function() {
+        this.disposeChildren();
         this.collection.each(this.addOne, this);
-      },
-
-      onClose: function() {
-        console.log('Cleared up view');
+        this.wasUpdated();
       }
 
-    }),
+    });
 
-    Item: Backbone.View.extend({
-      tagName: 'li',
-
-      template: _.template(require('text!./item.jst')),
-
-      render: function() {
-        $(this.el).html(this.template(this.model.toJSON()));
-        return this;
-      }
-
-    })
-
-  };
-
-
-
-  return {
-    Model: Model,
-    Collection: Collection,
-    Views: Views
-  };
+  })();
+  
+  return List;
 
 
 });

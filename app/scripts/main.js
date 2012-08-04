@@ -12,7 +12,8 @@ define(function(require) {
     // navigation from this instance.
     app.router = new Router({
       // Define your container div where all content will be displayed.
-      container: $("#appcontent")
+      container: $("#appcontent"),
+      scrollWrapper: $("#main")
     });
 
     // Trigger the initial route
