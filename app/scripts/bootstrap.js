@@ -9,6 +9,7 @@ require.config({
     'backbone':   '../../assets/js/libs/backbone-0.9.2',
     'fastclick':  '../../assets/js/libs/fastclick',
     'recognizr':  '../../assets/js/libs/recognizr-0.1.0',
+    'handlebars': '../../assets/js/libs/handlebars-1.0rc1',
     
     // Plugins
     'text':                  '../../assets/js/plugins/text-1.0.7',
@@ -36,6 +37,12 @@ require.config({
       deps: [ 'lodash', 'zepto' ],
       exports: function() {
         return this.Backbone;
+      }
+    },
+
+    handlebars: {
+      exports: function() {
+        return this.Handlebars;
       }
     },
 
