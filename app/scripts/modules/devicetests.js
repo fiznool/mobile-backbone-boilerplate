@@ -21,6 +21,25 @@ define(function(require) {
 
   });
 
+  app.on('network:online', function() {
+    alert('We are online');
+  });
+
+  app.on('network:offline', function() {
+    alert('We are offline');
+  });
+
+  app.trigger('network:with', {
+    'online': function() {
+      alert('We have started the app in online mode.');
+    },
+
+    'offline': function() {
+      alert('We have started the app in offline mode.');
+    }
+
+  });
+
   return {};
 
 });

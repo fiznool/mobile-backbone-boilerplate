@@ -5,10 +5,8 @@ define(function(require) {
 
   var namespace = 'orientation';
 
-  var orientation;
-
-  var _normalise = function(o) {
-    switch(o) {
+  var _normalise = function() {
+    switch(window.orientation) {
     case 0:
     case 180:
       return 'portrait';
@@ -20,22 +18,22 @@ define(function(require) {
     }
   };
 
-  orientation = _normalise(window.orientation);
+  var _orientation = _normalise(window.orientation);
 
   var withOrientation = function(options) {
-    if (_.isFunction(options[orientation])) {
-      options[orientation].apply();
+    if (_.isFunction(options[_orientation])) {
+      options[_orientation].apply();
     }
   };
 
   // Bind to orientation / resize changes and dispatch events when things change
   $(window).on('orientationchange', function() {
-    orientation = _normalise(window.orientation);
+    _orientation = _normalise(window.orientation);
 
     // Trigger both an 'orientation:change' and either
     // 'orientation:portrait' or 'orientation:landscape'
-    app.trigger(namespace + ':change', orientation);
-    app.trigger(namespace + ':' + orientation);
+    app.trigger(namespace + ':change', _orientation);
+    app.trigger(namespace + ':' + _orientation);
   });
 
   var exports = {

@@ -7,6 +7,7 @@ define(function(require) {
   // Core
   require('core/remotedata');
   require('core/orientation');
+  require('core/network');
 
   // Components
   var Toolbar = require('components/toolbar');
