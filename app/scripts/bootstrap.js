@@ -19,6 +19,7 @@ require.config({
     'templates': '../templates',
     'navigator': 'core/navigator',
     'scaffold': 'core/scaffold',
+    'remotedata': 'core/remotedata',
     'components': 'core/components'
     
   },

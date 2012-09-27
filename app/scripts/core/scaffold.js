@@ -24,6 +24,18 @@ define(function(require) {
 
       wasRendered: function() {
         /* Override if necessary, at this point the view is in the DOM */
+      },
+
+      fetch: function(model, options) {
+        app.trigger('data:fetch', model, options);
+      },
+
+      load: function(url, options) {
+        app.trigger('data:load', url, options);
+      },
+
+      submit: function(model, options) {
+        app.trigger('data:submit', model, options);
       }
 
     })

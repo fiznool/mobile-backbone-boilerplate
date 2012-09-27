@@ -1,12 +1,20 @@
 define(function(require) {
 
+  // Libs
   var $ = require('zepto');
-  var app = require('app');
-  var Router = require('router');
-  var Toolbar = require('components/toolbar');
-
   var FastClick = require('fastclick');
 
+  // Core
+  var RemoteData = require('remotedata');
+
+  // Components
+  var Toolbar = require('components/toolbar');
+
+  // App-specific
+  var app = require('app');
+  var Router = require('router');
+
+  
   // Treat the jQuery ready function as the entry point to the application.
   // Inside this function, kick-off all initialization, everything up to this
   // point should be definitions.
