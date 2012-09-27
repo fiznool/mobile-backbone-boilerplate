@@ -45,7 +45,12 @@ define(function(require) {
     // Prevent 300ms tap delay
     new FastClick($el.app[0]);
 
+    // Uncomment to test components
+    // require('modules/devicetests');
+
     // Trigger the initial route
+    // At this point, all dependencies required above will be loaded
+    // This means all event modules will be registered and ready to be triggered
     Backbone.history.start();
   });
 

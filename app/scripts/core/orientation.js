@@ -1,5 +1,6 @@
 define(function(require) {
 
+  var $ = require('zepto');
   var app = require('app');
 
   var namespace = 'orientation';
@@ -29,7 +30,7 @@ define(function(require) {
 
   // Bind to orientation / resize changes and dispatch events when things change
   $(window).on('orientationchange', function() {
-    orientation = normalise(window.orientation);
+    orientation = _normalise(window.orientation);
 
     // Trigger both an 'orientation:change' and either
     // 'orientation:portrait' or 'orientation:landscape'
@@ -38,7 +39,7 @@ define(function(require) {
   });
 
   var exports = {
-    withOrientation: withOrientation
+    'with': withOrientation
   };
 
   app.registerModule(namespace, exports);
