@@ -597,11 +597,11 @@ input[type="search"] {
 }
 
 /* line 38, ../../app/styles/core/_toolbar.scss */
-.fixedbars #headerbar, .fixedbars #footerbar {
+.fixedbar #headerbar, .fixedbar #footerbar {
   position: fixed;
 }
 /* line 42, ../../app/styles/core/_toolbar.scss */
-.fixedbars #main {
+.fixedbar #main {
   overflow: auto;
 }
 

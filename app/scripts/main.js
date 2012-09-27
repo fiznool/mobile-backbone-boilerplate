@@ -6,6 +6,7 @@ define(function(require) {
 
   // Core, comment out bits you don't need
   // Each registers with app events
+  require('core/device');
   require('core/remotedata');
   require('core/orientation');
   require('core/network');

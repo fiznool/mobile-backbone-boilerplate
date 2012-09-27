@@ -1,5 +1,6 @@
 /*
  * Recognizr
+ * v0.2.0
  *
  * A small library to detect the capabilities of mobile web browsers.
  *
@@ -24,13 +25,16 @@
     
   // Recognizr
  
-  var _buildReturnObj = function(browserFamily, browserVersion, scroll, animations) {
+  var _buildReturnObj = function(browserFamily, browserVersion, toolbar, form, animations) {
       var rtn = {
         'browser': {
           'family': browserFamily,
           'version': browserVersion
         },
-        'scroll': scroll,
+        'scroll': {
+          'toolbar': toolbar,
+          'form': form
+        },
         'animations': animations
       };
 
@@ -51,66 +55,54 @@
     var blackberry = ua.match(/Blackberry.*Version\/([0-9]+)/);
     var bbversion = blackberry && blackberry[1];
 
-    // iOS
+    // iOS: Mobile Safari
     if (ua.indexOf("iPhone") > -1 || ua.indexOf("iPad") > -1 || ua.indexOf("iPod") > -1) {
       if (wkversion && wkversion >= 534) {
-        //iOS 5+
-        // Using overflow: scroll rather than position:fixed
-        // This allows any side nav menu to stay static while content scrolls
-        return _buildReturnObj('safari', '5+', 'overflowscroll', true);
-
-      } else if (wkversion && wkversion >= 528) {
-        // iOS 3.1.3 - 4.x
-        return _buildReturnObj('safari', '3.1.3,4.x', 'polyfillscroll', true);
+        // iOS 5/6
+        // Supports pos:fixed but needs to be disabled when forms are present
+        // as toolbars will start scrolling inline when form elements are active
+        return _buildReturnObj('safari', '5+', 'fixed', 'inline', true);
 
       } else {
-        // iOS < 3.1.3
-        return _buildReturnObj('safari', '3.1.2-', 'inline', false);
+        // iOS <= 4.x
+        // We no longer like iScroll, so scroll inline. Animations are out, too.
+        return _buildReturnObj('safari', '4-', 'inline', 'inline', false);
+      }
+
+    }
+
+    // ANDROID: Stock Browser
+    if (ua.indexOf('Android') > -1) {
+      if (wkversion && wkversion >= 534) {
+        // Android 4+
+        // Supports pos:fixed but needs to be disabled when forms are present
+        // as input element scrolls on top of the toolbar.
+        // Animations are OK.
+        return _buildReturnObj('android', '4+', 'fixed', 'inline', true);
+
+      } else if (wkversion && wkversion >= 533) {
+        // Android 2.2 - 3.2
+        // Supports pos:fixed but needs to be disabled when forms are present
+        // as input element scrolls on top of the toolbar.
+        // Animations are disabled.
+        return _buildReturnObj('android', '2.2->3.2', 'fixed', 'inline', false);
+
+      } else {
+        // Sucky Android version. Minimal anything.
+        return _buildReturnObj('android', '2.1-', 'inline', 'inline', false);
       }
 
     }
 
     // CHROME / CHROMIUM
+    // Well supported, even form fields can be scrolled.
     if (ua.indexOf('Chrome') > -1 || ua.indexOf('Chromium') > -1) {
-      return _buildReturnObj('chrome', '1+', 'positionfixed', true);
-    }
-
-    // ANDROID
-    if (ua.indexOf('Android') > -1) {
-      if (wkversion && wkversion >= 534) {
-        // Android 4+
-        // Android ICS browser also supports position:fixed. But overflow:scroll found to work better.
-        // With pos:fixed, the header is masked by the URL bar when scrolling up.
-        return _buildReturnObj('android', '4+', 'overflowscroll', true);
-
-      } else if (wkversion && wkversion >= 525) {
-        // Android 1.6 - 3.2
-        // Animations on Android < ICS suck balls
-        return _buildReturnObj('android', '1.6,3.x', 'polyfillscroll', false);
-
-      } else {
-        // Sucky Android version. Minimal anything.
-        return _buildReturnObj('android', '1.5-', 'inline', false);
-      }
-
-    }
-
-    // IE9+ Mobile
-    if (msie && msieversion >= 9) {
-      // Amusingly, IE9 mobile supports overflow:scroll. But not with momentum scrolling.
-      // iScroll flat out refuses to work.
-      // Animations? Ha, don't even think about it!
-      return _buildReturnObj('msie', '9+', 'overflowscroll', false);
-    }
-
-    // BLACKBERRY 6+
-    if (ua.indexOf('Blackberry') > -1 && bbversion && bbversion >= 6) {
-      return _buildReturnObj('blackberry', '6+', 'iscroll', false);
+      return _buildReturnObj('chrome', '1+', 'fixed', 'fixed', true);
     }
 
     // EVERYTHING ELSE
     // Basics. Inline scrolling, no animations.
-    return _buildReturnObj('unknown', '', 'inline', false);
+    return _buildReturnObj('unknown', '', 'inline', 'inline', false);
 
   })(navigator.userAgent);
 

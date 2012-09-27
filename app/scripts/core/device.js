@@ -9,12 +9,19 @@ define(function(require) {
   // Set CSS classes from recognizr
   var classStr = '';
 
-  if (device.browser.family) {
+  if (device.browser && device.browser.family) {
     classStr += ' ' + device.browser.family;
   }
 
   if (device.scroll) {
-    classStr += ' ' + device.scroll;
+    if (device.scroll.toolbar) {
+      classStr += ' ' + device.scroll.toolbar + 'bar';
+    }
+
+    if (device.scroll.form) {
+      classStr += ' ' + device.scroll.form + 'form';
+    }
+
   }
 
   if (device.animations) {
