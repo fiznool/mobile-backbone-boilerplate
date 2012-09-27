@@ -1,0 +1,15 @@
+@import "base";
+
+// Disable default list styling so that nav lists look native-y
+.listview {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    text-decoration: none;
+    &:link, &:visited, &:hover, &:active {
+      color: inherit;
+    }
+  }
+}

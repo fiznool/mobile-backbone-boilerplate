@@ -1,7 +1,7 @@
 define(function(require) {
   
-  var $ = require('jquery');
-  var _ = require('underscore');
+  var $ = require('zepto');
+  var _ = require('lodash');
   var app = require('app');
   var Scaffold = require('scaffold');
   
@@ -34,8 +34,7 @@ define(function(require) {
     },
 
     modelFetched: function() {
-      $(this.el).html(this.template(this.model.toJSON()));
-      this.wasUpdated();
+      this.$el.html(this.template(this.model.toJSON()));
       return this;
     }
 

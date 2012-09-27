@@ -1,12 +1,18 @@
 define(function(require) {
 
+  var app = require('app');
+  var _ = require('lodash');
   var Backbone = require('backbone');
-  var scroller = require('scroller');
-
+  
   // Plugins
   require('backbone-zombienation');
   require('backbone-deepmodel');
   require('backbone-super');
+
+  // Set _ template settings
+  _.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+  };
 
   return {
 
@@ -16,8 +22,8 @@ define(function(require) {
 
     View: Backbone.View.extend({
 
-      wasUpdated: function() {
-        scroller.refresh();
+      wasRendered: function() {
+        /* Override if necessary, at this point the view is in the DOM */
       }
 
     })

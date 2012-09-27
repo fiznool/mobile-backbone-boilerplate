@@ -1,3 +1,18 @@
+// Reset styles
+@import "core/mbp/normalise";
+@import "core/mbp/base";
+
+// Generic app styles
 @import "core/layout";
-@import "detail";
-@import "list";
+@import "core/form";
+@import "core/list";
+@import "core/toolbar";
+
+// Common styles for this app
+@import "app";
+
+// Import all of your modules in here
+@import "modules/detail";
+@import "modules/list";
+
+@import "core/mbp/helpers";   // Comes last as per MBP requirements

@@ -1,0 +1,45 @@
+@import "base";
+
+// By default, the toolbars are inline.
+.toolbar {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+}
+
+#headerbar {
+  top: 0;
+  height: $headerbar-height;
+  line-height: $headerbar-height;
+  font-size: $headerbar-font-size;
+}
+
+#footerbar {
+  bottom: 0;
+  height: $footerbar-height;
+  line-height: $footerbar-height;
+  font-size: $footerbar-font-size;
+}
+
+#main {
+  z-index: 1;
+  padding-top: $headerbar-height;
+  padding-bottom: $footerbar-height;
+}
+
+// Adding the .fixedbars class to the html element will fix the toolbars using position:fixed.
+// This is supported on most recent mobile OS, except when we have input fields on the page.
+// In this case, it is recommended to disable the fixed bars by temporarily removing the
+// .fixedbars class.
+
+.fixedbars {
+  #headerbar, #footerbar {
+    position: fixed;
+  }
+
+  #main {
+    overflow: auto;
+  }
+}

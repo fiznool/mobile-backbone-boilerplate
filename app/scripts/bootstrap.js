@@ -4,10 +4,10 @@ require.config({
   paths: {
 
     // Libraries
-    'jquery':     '../../assets/js/libs/jquery-1.7.2', // Can switch to Zepto if we don't need WP7 support
-    'underscore': '../../assets/js/libs/underscore-1.3.1',
+    'zepto':      '../../assets/js/libs/zepto-1.0rc1',
+    'lodash':     '../../assets/js/libs/lodash-0.7.0',
     'backbone':   '../../assets/js/libs/backbone-0.9.2',
-    'iscroll':    '../../assets/js/libs/iscroll-lite-4.1.6',
+    'fastclick':  '../../assets/js/libs/fastclick',
     'recognizr':  '../../assets/js/libs/recognizr-0.1.0',
     
     // Plugins
@@ -18,48 +18,28 @@ require.config({
     
     'templates': '../templates',
     'navigator': 'core/navigator',
-    'scaffold': 'core/scaffold',
-    'scroller': 'core/scroller'
+    'scaffold': 'core/scaffold'
     
   },
 
   shim: {
 
-    /*
-    jquery: {
+    zepto: {
       exports: function() {
-        // If we are using Zepto this is important, as Zepto is not AMD compliant.
         return this.Zepto;
-      }
-    },
-    */
-
-    iscroll: {
-      exports: function() {
-        return this.iScroll;
-      }
-    },
-
-    underscore: {
-      exports: function() {
-        this._.templateSettings = {
-          interpolate : /\{\{(.+?)\}\}/g
-        };
-
-        return this._;
       }
     },
 
     backbone: {
-      deps: ["jquery", "underscore"],
+      deps: [ 'lodash', 'zepto' ],
       exports: function() {
         return this.Backbone;
       }
     },
 
-    'backbone-deepmodel': { deps: ["backbone"] },
-    'backbone-super': { deps: ["backbone"] },
-    'backbone-zombienation': { deps: ["backbone"] }
+    'backbone-deepmodel': { deps: ['backbone'] },
+    'backbone-super': { deps: ['backbone'] },
+    'backbone-zombienation': { deps: ['backbone'] }
   }
 
 });

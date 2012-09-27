@@ -9,15 +9,16 @@ Overview
 This boilerplate provides a starting point to build single-page mobile web apps, targeting mobile Webkit browsers (iOS and Android). It uses the following components:
 
 - [HTML5 Mobile Boilerplate](http://html5boilerplate.com/mobile) to provide a basis for the project layout.
-- [Backbone.js](http://documentcloud.github.com/backbone/) to provide an MVC-ish structure to your app.
+- [Zepto.js](http://zeptojs.com) as a lightweight jQuery alternative for mobile browsers.
+- [Backbone.js](http://documentcloud.github.com/backbone/) to provide an MVC-ish structure to your app, combined with [Lodash](http://lodash.com), a lightweight drop-in replacement for Underscore.
 - [RequireJS](http://requirejs.org) to organise your project into loosly coupled, highly testable modules.
-- [RequireJS text plugin](http://requirejs.org/docs/api.html#text) combined with [Underscore templating](http://documentcloud.github.com/underscore/#template) with a [Mustache-like syntax](https://gist.github.com/2169509) to separate HTML views into individual template snippets.
-- [RequireJS shim](https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#wiki-shim) to support the loading of libraries that are non-AMD compatible (here's looking at you, Underscore and Backbone).
+- [RequireJS text plugin](http://requirejs.org/docs/api.html#text) combined with [Lodash templating](http://lodash.com/docs#template) with a [Mustache-like syntax](https://gist.github.com/2169509) to separate HTML views into individual template snippets.
+- [RequireJS shim](https://github.com/jrburke/requirejs/wiki/Upgrading-to-RequireJS-2.0#wiki-shim) to support the loading of libraries that are non-AMD compatible (here's looking at you, Lodash and Backbone).
 - [Almond.js](https://github.com/jrburke/almond), a stripped down version of RequireJS which can be used in place of RequireJS in a production environment.
 - [QUnit](http://docs.jquery.com/QUnit) JavaScript unit testing tool.
 - [Grunt](https://github.com/cowboy/grunt) to lint, test, concatenate and minify the app, ready for deployment.
 - [Compass](http://compass-style.org/) to simplify styling.
-- [Energize](https://github.com/davidcalhoun/energize.js) to speed up clickable (touchable) links on mobile devices.
+- [FastClick](https://github.com/ftlabs/fastclick) to speed up clickable (touchable) links on mobile devices.
 
 Folder Structure
 ----------------
@@ -107,11 +108,11 @@ Each module should have a respective *test module* which is responsible for unit
 
 ####Libraries####
 
-This project includes Zepto, Backbone, Underscore, RequireJS + text plugin, Almond.js, Modernizr and Energize.
+This project includes Zepto, Backbone, Lodash, RequireJS + text plugin, Almond.js, Modernizr and FastClick.
 
 The latter two are included as normal in `index.html`. The rest are loaded in when needed with RequireJS.
 
-Those libraries which do not support AMD loading (currently Zepto, Underscore and Backbone) are loaded using the RequireJS `shim` configuration. This allows them to be requested as normal, converting them into forms that can be `require()`d.
+Those libraries which do not support AMD loading (currently Zepto and Backbone) are loaded using the RequireJS `shim` configuration. This allows them to be requested as normal, converting them into forms that can be `require()`d.
 
 The `shim` directive is new to RequireJS 2.0, and replaces the old method of [bootstrapping libs](http://fiznool.com/post/18436104594/bootstrapping-your-libs-with-requirejs).
 

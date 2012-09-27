@@ -1,5 +1,5 @@
 define(function(require) {
-  var $ = require('jquery');
+  var $ = require('zepto');
          
   module ("QUnit Testing basics");
 

@@ -1,6 +1,6 @@
 define(function(require) {
-  var $ = require('jquery');
-  var _ = require('underscore');
+  var $ = require('zepto');
+  var _ = require('lodash');
   var Scaffold = require('scaffold');
 
   var Item = (function() {
@@ -60,21 +60,20 @@ define(function(require) {
       },
 
       render: function() {
-        $(this.el).html(this.template());
+        this.$el.html(this.template());
         return this;
       },
 
       addOne: function(item) {
         var view = new Item({ model: item });
         view.render();
-        $(this.el).find('ul').append(view.el);
+        this.$el.find('ul').append(view.el);
         this.addChild(view);
       },
 
       addAll: function() {
         this.disposeChildren();
         this.collection.each(this.addOne, this);
-        this.wasUpdated();
       }
 
     });
