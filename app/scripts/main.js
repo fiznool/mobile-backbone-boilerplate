@@ -5,7 +5,8 @@ define(function(require) {
   var FastClick = require('fastclick');
 
   // Core
-  var RemoteData = require('remotedata');
+  require('core/remotedata');
+  require('core/orientation');
 
   // Components
   var Toolbar = require('components/toolbar');
