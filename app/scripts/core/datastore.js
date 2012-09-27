@@ -58,7 +58,13 @@ define(function(require){
     var key = (options && options.where)? options.where : 'memory';
 
     // Normalise the key, just in case
+    if (key === 'localstorage') {
+      key = 'localStorage';
+    }
 
+    if (key === 'sessionstorage') {
+      key = 'sessionStorage';
+    }
 
     return locations[key];
   };
@@ -68,9 +74,12 @@ define(function(require){
     store.setItem(key, value);
   };
 
-  var get = function(key, options) {
-    var store = getStore(options);
-    return store.getItem(key);
+  var withValue = function(key, callback, options){
+    var store;
+    if (_.isFunction(callback)) {
+      store = getStore(options);
+      callback.apply(callback, [store.getItem(key)]);
+    }
   };
 
   var remove = function(key, options) {
@@ -79,9 +88,9 @@ define(function(require){
   };
 
   var exports = {
-    save: set,
-    fetch: get,
-    destroy: remove
+    'with': withValue,
+    'save': set,
+    'destroy': remove
   };
 
   app.registerModule('datastore', exports);
