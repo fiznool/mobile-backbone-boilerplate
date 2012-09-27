@@ -30,12 +30,12 @@ define(function(require) {
         app.trigger('data:fetch', model, options);
       },
 
-      load: function(url, options) {
-        app.trigger('data:load', url, options);
+      get: function(url, options) {
+        app.trigger('data:get', url, options);
       },
 
-      submit: function(model, options) {
-        app.trigger('data:submit', model, options);
+      save: function(model, options) {
+        app.trigger('data:save', model, options);
       }
 
     })
