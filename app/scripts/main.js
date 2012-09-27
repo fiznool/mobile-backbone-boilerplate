@@ -4,12 +4,13 @@ define(function(require) {
   var $ = require('zepto');
   var FastClick = require('fastclick');
 
-  // Core
+  // Core, comment out bits you don't need
+  // Each registers with app events
   require('core/remotedata');
   require('core/orientation');
   require('core/network');
+  require('core/datastore');
 
-  // Components
   var Toolbar = require('components/toolbar');
 
   // App-specific
