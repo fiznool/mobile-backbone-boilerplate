@@ -1,6 +1,7 @@
 define(function(require) {
   var $ = require('zepto');
   var _ = require('lodash');
+  var app = require('app');
   var Scaffold = require('scaffold');
 
   var Item = (function() {
@@ -37,7 +38,7 @@ define(function(require) {
 
     return Scaffold.View.extend({
 
-      tagName: 'nav',
+      tagName: 'ul',
 
       template: _.template(require('text!templates/list.jst')),
 
@@ -54,6 +55,10 @@ define(function(require) {
 
         this.bindTo(this.collection, 'add', this.addOne);
         this.bindTo(this.collection, 'reset', this.addAll);
+
+        app.trigger('headerbar:update', {
+          title: 'Choose your weapon!'
+        });
         
         this.collection.fetch();
 
@@ -67,7 +72,7 @@ define(function(require) {
       addOne: function(item) {
         var view = new Item({ model: item });
         view.render();
-        this.$el.find('ul').append(view.el);
+        this.$el.append(view.el);
         this.addChild(view);
       },
 

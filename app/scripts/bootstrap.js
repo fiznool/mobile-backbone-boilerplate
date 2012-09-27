@@ -18,7 +18,8 @@ require.config({
     
     'templates': '../templates',
     'navigator': 'core/navigator',
-    'scaffold': 'core/scaffold'
+    'scaffold': 'core/scaffold',
+    'components': 'core/components'
     
   },
 

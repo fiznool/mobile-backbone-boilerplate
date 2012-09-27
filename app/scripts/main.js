@@ -3,6 +3,7 @@ define(function(require) {
   var $ = require('zepto');
   var app = require('app');
   var Router = require('router');
+  var Toolbar = require('components/toolbar');
 
   var FastClick = require('fastclick');
 
@@ -18,6 +19,12 @@ define(function(require) {
       footerbar: $('#footerbar'),
       content: $('#content')
     };
+
+    // Create the header and footer modules
+    new Toolbar({
+      'headerbar': $el.headerbar,
+      'footerbar': $el.footerbar
+    });
 
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.

@@ -25,6 +25,9 @@ define(function(require) {
 
     initialize: function(options) {
       this.model = new Model({ id: options.id });
+      app.trigger('headerbar:update', {
+        title: 'Weapon selected...'
+      });
       this.bindTo(this.model, 'change', this.modelFetched);
     },
 
@@ -35,6 +38,9 @@ define(function(require) {
 
     modelFetched: function() {
       this.$el.html(this.template(this.model.toJSON()));
+      app.trigger('headerbar:update', {
+        title: this.model.get('name')
+      });
       return this;
     }
 
