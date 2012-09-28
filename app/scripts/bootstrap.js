@@ -8,7 +8,7 @@ require.config({
     'lodash':     '../../assets/js/libs/lodash-0.7.0',
     'backbone':   '../../assets/js/libs/backbone-0.9.2',
     'fastclick':  '../../assets/js/libs/fastclick',
-    'recognizr':  '../../assets/js/libs/recognizr-0.1.0',
+    'recognizr':  '../../assets/js/libs/recognizr-0.2.0',
     'handlebars': '../../assets/js/libs/handlebars-1.0rc1',
     
     // Plugins
