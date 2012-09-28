@@ -10,11 +10,19 @@ define(function(require) {
 
       tagName: 'li',
 
+      events: {
+        'tap': 'onTap'
+      },
+
       template: _.template(require('text!templates/item.jst')),
 
       render: function() {
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
+      },
+
+      onTap: function(e) {
+        //console.log(e);
       }
 
     });

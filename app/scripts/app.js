@@ -3,6 +3,13 @@ define(function(require) {
   var _ = require('lodash');
   var Backbone = require('backbone');
 
+  // Provide a global location to place configuration settings and module
+  // creation.
+  var app = {
+    // The root path to run the application.
+    root: "/"
+  };
+
   // Convenience function for registering a method as an event
   var _registerWith = function(app, namespace, context) {
     return function(item, key) {
@@ -17,7 +24,7 @@ define(function(require) {
         
   };
 
-  return _.extend({
+  return _.extend(app, {
 
     publish: function(key) {
 

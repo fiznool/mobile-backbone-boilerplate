@@ -7,7 +7,7 @@ require.config({
     'zepto':      '../../assets/js/libs/zepto-1.0rc1',
     'lodash':     '../../assets/js/libs/lodash-0.7.0',
     'backbone':   '../../assets/js/libs/backbone-0.9.2',
-    'fastclick':  '../../assets/js/libs/fastclick',
+    // 'fastclick':  '../../assets/js/libs/fastclick',  // No longer required as we should use zepto tap event
     'recognizr':  '../../assets/js/libs/recognizr-0.2.0',
     'handlebars': '../../assets/js/libs/handlebars-1.0rc1',
     
