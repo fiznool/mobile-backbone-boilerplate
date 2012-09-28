@@ -8,8 +8,6 @@ define(function(require) {
 
     return Scaffold.View.extend({
 
-      tagName: 'li',
-
       events: {
         'tap': 'onTap'
       },
@@ -17,7 +15,7 @@ define(function(require) {
       template: _.template(require('text!templates/item.jst')),
 
       render: function() {
-        $(this.el).html(this.template(this.model.toJSON()));
+        this.setElement(this.template(this.model.toJSON()));
         return this;
       },
 

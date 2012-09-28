@@ -21,6 +21,7 @@ define(function(require) {
       // Example:
       // "click .check"              : "toggleDone",
       // "dblclick div.todo-text"    : "edit"
+      
     },
 
     initialize: function(options) {

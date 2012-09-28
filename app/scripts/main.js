@@ -2,6 +2,7 @@ define(function(require) {
 
   // Libs
   var $ = require('zepto');
+  require('touchivate');
   
   // Core, comment out bits you don't need
   // Each registers with app events
@@ -37,6 +38,9 @@ define(function(require) {
       'footerbar': $el.footerbar
     });
 
+    // Add active states to buttons and lists when tapped
+    $el.app.touchivate();
+
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
     app.router = new Router({
@@ -61,7 +65,7 @@ define(function(require) {
     var href = { prop: $(this).prop("href"), attr: $(this).attr("href") };
     // Get the absolute root.
     var root = location.protocol + "//" + location.host + app.root;
-    console.log(evt);
+    
     // Ensure the root is part of the anchor href, meaning it's relative.
     if (href.prop.slice(0, root.length) === root) {
       // Stop the default event to ensure the link will not cause a page
