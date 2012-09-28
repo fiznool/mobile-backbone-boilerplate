@@ -20,7 +20,9 @@ require.config({
     'templates': '../templates',
     'navigator': 'core/navigator',
     'scaffold': 'core/scaffold',
-    'components': 'core/components'
+    'components': 'core/components',
+    'timer': 'core/timer',
+    'intervalTimer': 'core/intervalTimer'
     
   },
 
