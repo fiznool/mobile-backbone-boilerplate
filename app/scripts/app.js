@@ -7,7 +7,10 @@ define(function(require) {
   // creation.
   var app = {
     root: '/',  // The root path to run the application.
-    analyticsID: 'UA-XXXXXX-X'   // Insert GA account in app
+    analyticsID: 'UA-XXXXXX-X',   // Insert GA account in app
+    apiUrl: function(path) {
+      return app.root + path;
+    }
   };
 
   // Convenience function for registering a method as an event
