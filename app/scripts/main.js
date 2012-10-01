@@ -2,7 +2,7 @@ define(function(require) {
 
   // Libs
   var $ = require('zepto');
-  require('touchivate');
+  require('tappivate');
   
   // Core, comment out bits you don't need
   // Each registers with app events
@@ -39,7 +39,7 @@ define(function(require) {
     });
 
     // Add active states to buttons and lists when tapped
-    $el.app.touchivate();
+    $el.app.tappivate();
 
     // Define your master router on the application namespace and trigger all
     // navigation from this instance.
