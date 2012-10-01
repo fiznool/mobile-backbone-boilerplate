@@ -6,8 +6,8 @@ define(function(require) {
   // Provide a global location to place configuration settings and module
   // creation.
   var app = {
-    // The root path to run the application.
-    root: "/"
+    root: '/',  // The root path to run the application.
+    analyticsID: 'UA-XXXXXX-X'   // Insert GA account in app
   };
 
   // Convenience function for registering a method as an event

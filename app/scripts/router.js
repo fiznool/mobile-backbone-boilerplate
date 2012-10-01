@@ -9,6 +9,7 @@ define(function(require) {
 
     initialize: function(options) {
       nav.init(options);
+      this.on('all', options.onRoute);
     },
     
     routes: {

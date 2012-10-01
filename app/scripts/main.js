@@ -11,6 +11,7 @@ define(function(require) {
   require('core/orientation');
   require('core/network');
   require('core/datastore');
+  require('core/analytics');
 
   var Toolbar = require('components/toolbar');
 
@@ -34,8 +35,15 @@ define(function(require) {
 
     // Create the header and footer modules
     new Toolbar({
-      'headerbar': $el.headerbar,
-      'footerbar': $el.footerbar
+      bars: {
+        'headerbar': $el.headerbar,
+        'footerbar': $el.footerbar
+      },
+      fixedpos: {
+        '$el': $('html'),
+        'cls': 'fixedbar'
+      }
+      
     });
 
     // Add active states to buttons and lists when tapped
@@ -45,11 +53,24 @@ define(function(require) {
     // navigation from this instance.
     app.router = new Router({
       // Define your container div where all content will be displayed.
-      container: $("#content")
+      container: $("#content"),
+
+      // Define callback for each route
+      onRoute: function() {
+        var frag = Backbone.history.getFragment();
+        /* Uncomment for analytics tracking
+        app.trigger('network:ifonline', function() {
+          app.trigger('analytics:trackPageview', '/#' + frag);
+        });
+        */
+      }
     });
 
     // Uncomment to test components
     // require('modules/devicetests');
+
+    // Hook into page changes
+
 
     // Trigger the initial route
     // At this point, all dependencies required above will be loaded

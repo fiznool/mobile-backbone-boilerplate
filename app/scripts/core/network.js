@@ -19,6 +19,14 @@ define(function(require) {
     }
   };
 
+  var ifonline = function(cb) {
+    withNetwork({ online: cb });
+  };
+
+  var ifoffline = function(cb) {
+    withNetwork({ offline: cb });
+  };
+
   // Hook into the browser's 'online' and 'offline' events and subsequently fire app:events!
   _.each(['online', 'offline'], function(status) {
     $(window).on(status, function(evt) {
@@ -27,7 +35,9 @@ define(function(require) {
   });
   
   var exports = {
-    'with': withNetwork
+    'with': withNetwork,
+    'ifonline': ifonline,
+    'ifoffline': ifoffline
   };
 
   app.registerModule(namespace, exports);

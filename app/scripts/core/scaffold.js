@@ -36,6 +36,10 @@ define(function(require) {
 
       save: function(model, options) {
         app.trigger('data:save', model, options);
+      },
+
+      post: function(url, options) {
+        app.trigger('data:post', url, options);
       }
 
     })
