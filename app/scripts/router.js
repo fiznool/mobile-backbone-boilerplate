@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var nav = require('navigator');
+  var nav = require('core/navigator');
   var List = require('modules/list');
   var Detail = require('modules/detail');
 

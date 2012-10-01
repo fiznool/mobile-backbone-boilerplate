@@ -2,7 +2,7 @@ define(function(require) {
 
   // Libs
   var $ = require('zepto');
-  require('tappivate');
+  require('zepto-tappivate');
   
   // Core, comment out bits you don't need
   // Each registers with app events
@@ -13,8 +13,10 @@ define(function(require) {
   require('core/datastore');
   require('core/analytics');
 
-  var Toolbar = require('components/toolbar');
-
+  // UI components
+  var Alert = require('core/ui/alert');
+  var Toolbar = require('core/ui/toolbar');
+  
   // App-specific
   var app = require('app');
   var Router = require('router');
@@ -30,6 +32,7 @@ define(function(require) {
       app: $('#app'),
       headerbar: $('#headerbar'),
       footerbar: $('#footerbar'),
+      alert: $('#alert'),
       content: $('#content')
     };
 
@@ -44,6 +47,11 @@ define(function(require) {
         'cls': 'fixedbar'
       }
       
+    });
+
+    // Create alert module (pop-overlay)
+    new Alert({
+      el: $el.alert
     });
 
     // Add active states to buttons and lists when tapped
@@ -68,9 +76,6 @@ define(function(require) {
 
     // Uncomment to test components
     // require('modules/devicetests');
-
-    // Hook into page changes
-
 
     // Trigger the initial route
     // At this point, all dependencies required above will be loaded

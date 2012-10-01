@@ -1,5 +1,9 @@
 @import "base";
 
+// Twitter bootstrap stuff
+@import "bootstrap/mixins";
+
+
 // Ensure the entire screen is filled
 html, body {
   width: 100%;

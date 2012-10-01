@@ -1,0 +1,26 @@
+@import "base";
+@import "bootstrap/alerts";
+@import "bootstrap/component-animations";  // For alert animations
+@import "bootstrap/close";
+
+
+// Alert
+.alert  {
+  margin: 10px;
+  h1, h2, h3, h4 {
+    margin: 0 0 10px 0;
+  }
+  ul {
+    padding-left: 30px;
+  }
+}
+
+/*
+#alert {
+  &.alert-hidden {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+}
+*/

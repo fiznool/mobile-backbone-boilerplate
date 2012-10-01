@@ -2,7 +2,7 @@ define(function(require) {
   var $ = require('zepto');
   var _ = require('lodash');
   var app = require('app');
-  var Scaffold = require('scaffold');
+  var Scaffold = require('core/scaffold');
 
   var Item = (function() {
 
