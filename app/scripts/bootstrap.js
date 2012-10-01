@@ -16,7 +16,7 @@ require.config({
     'backbone-deepmodel':    '../../assets/js/plugins/backbone-deepmodel-0.7.3',
     'backbone-super':        '../../assets/js/plugins/backbone-super',
     'backbone-zombienation': '../../assets/js/plugins/backbone-zombienation-0.1.0',
-    'touchivate':            '../../assets/js/plugins/touchivate-0.1.0',
+    'tappivate':             '../../assets/js/plugins/zepto-tappivate-0.2.0',
     
     'templates': '../templates',
     'navigator': 'core/navigator',
@@ -51,7 +51,7 @@ require.config({
     'backbone-deepmodel': { deps: ['backbone'] },
     'backbone-super': { deps: ['backbone'] },
     'backbone-zombienation': { deps: ['backbone'] },
-    'touchivate': { deps: ['zepto'] }
+    'tappivate': { deps: ['zepto'] }
   }
 
 });
