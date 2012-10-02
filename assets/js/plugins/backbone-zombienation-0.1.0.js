@@ -69,11 +69,13 @@
     },
 
     disposeChildren: function() {
-      _.each(this.children, function(child) {
-        if (child.dispose) {
-          child.dispose();
-        }
-      });
+      if (this.children) {
+        _.each(this.children, function(child) {
+          if (child.dispose) {
+            child.dispose();
+          }
+        });
+      }
 
       this.children = null;
     }
