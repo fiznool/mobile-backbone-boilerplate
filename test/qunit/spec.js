@@ -6,7 +6,7 @@ require.config({
 
     // Libraries
     'zepto':      '../../assets/js/libs/zepto-1.0rc1',
-    'lodash':     '../../assets/js/libs/lodash-0.7.0',
+    'lodash':     '../../assets/js/libs/lodash-0.8.0',
     'backbone':   '../../assets/js/libs/backbone-0.9.2',
     'recognizr':  '../../assets/js/libs/recognizr-0.1.0',
     
