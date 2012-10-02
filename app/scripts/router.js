@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var nav = require('navigator');
+  var nav = require('core/navigator');
   var List = require('modules/list');
   var Detail = require('modules/detail');
 
@@ -9,6 +9,7 @@ define(function(require) {
 
     initialize: function(options) {
       nav.init(options);
+      this.on('all', options.onRoute);
     },
     
     routes: {

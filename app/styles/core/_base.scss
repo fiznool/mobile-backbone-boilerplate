@@ -9,6 +9,8 @@ $experimental-support-for-microsoft: false;
 
 @import "compass/css3";
 @import "compass/css3/user-interface"; // https://github.com/chriseppstein/compass/issues/759
+@import "bootstrap/variables"; // Modify this for custom colors, font-sizes, etc
+@import "bootstrap/mixins";
 
 // Configurables
 $headerbar-height: 44px;

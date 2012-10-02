@@ -2,6 +2,7 @@
 # To install compass, `gem install compass`
 
 # Require any additional compass plugins here.
+require "bootstrap-sass"
 
 http_path = "/"
 css_dir = "assets/css"

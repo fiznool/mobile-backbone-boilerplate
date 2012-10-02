@@ -3,7 +3,7 @@ define(function(require) {
   var $ = require('zepto');
   var _ = require('lodash');
   var app = require('app');
-  var Scaffold = require('scaffold');
+  var Scaffold = require('core/scaffold');
 
   var Model = Scaffold.Model.extend({});
 
@@ -29,7 +29,19 @@ define(function(require) {
   });
 
   return function(options) {
-    _.each(options, function(item, key) {
+    // Add inline/fixed toolbar switcher
+    // Use this whenever a form is present:
+    //  app.trigger('toolbars:inline');
+    app.on('toolbars:fixed', function() {
+      options.fixedpos.$el.addClass(options.fixedpos.cls);
+    });
+
+    app.on('toolbars:inline', function() {
+      options.fixedpos.$el.removeClass(options.fixedpos.cls);
+    });
+
+    // Create each toolbar
+    _.each(options.bars, function(item, key) {
       
       var toolbar = new View({
         el: item

@@ -12,18 +12,16 @@ require.config({
     'handlebars': '../../assets/js/libs/handlebars-1.0rc1',
     
     // Plugins
-    'text':                  '../../assets/js/plugins/text-1.0.7',
-    'backbone-deepmodel':    '../../assets/js/plugins/backbone-deepmodel-0.7.3',
-    'backbone-super':        '../../assets/js/plugins/backbone-super',
-    'backbone-zombienation': '../../assets/js/plugins/backbone-zombienation-0.1.0',
-    'tappivate':             '../../assets/js/plugins/zepto-tappivate-0.2.0',
-    
-    'templates': '../templates',
-    'navigator': 'core/navigator',
-    'scaffold': 'core/scaffold',
-    'components': 'core/components',
-    'timer': 'core/timer',
-    'intervalTimer': 'core/intervalTimer'
+    'text':                   '../../assets/js/plugins/text-1.0.7',
+    'zepto-tappivate':        '../../assets/js/plugins/zepto-tappivate-0.2.0',
+    'backbone-deepmodel':     '../../assets/js/plugins/backbone-deepmodel-0.7.3',
+    'backbone-super':         '../../assets/js/plugins/backbone-super',
+    'backbone-zombienation':  '../../assets/js/plugins/backbone-zombienation-0.1.0',
+    'bootstrap-zepto-compat': '../../assets/js/plugins/bootstrap-zepto-compat',
+    'bootstrap-transition':   '../../assets/js/plugins/bootstrap-transition-2.1.1',
+    'bootstrap-alert':        '../../assets/js/plugins/bootstrap-alert-2.1.1',
+
+    'templates': '../templates'
     
   },
 
@@ -51,7 +49,13 @@ require.config({
     'backbone-deepmodel': { deps: ['backbone'] },
     'backbone-super': { deps: ['backbone'] },
     'backbone-zombienation': { deps: ['backbone'] },
-    'tappivate': { deps: ['zepto'] }
+
+    'bootstrap-zepto-compat': { deps: ['zepto'] },
+
+    'bootstrap-transition': { deps: ['bootstrap-zepto-compat'] },
+    'bootstrap-alert': { deps: ['bootstrap-zepto-compat', 'bootstrap-transition'] },
+
+    'zepto-tappivate': { deps: ['zepto'] }
   }
 
 });
