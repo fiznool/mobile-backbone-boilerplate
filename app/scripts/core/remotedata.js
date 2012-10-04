@@ -93,11 +93,65 @@ define(function(require) {
     });
   };
 
+  // do an ajax put
+  var put = function(url, data, options) {
+    var complete = options.complete || noop;
+    var success = options.success || noop;
+    var error = options.error || noop;
+    $.ajax({
+      type: 'PUT',
+      data: data,
+      url: url,
+      contentType: options.contentType,
+      dataType: options.dataType,
+      timeout: options.timeout,
+      headers: options.headers,
+      async: options.async,
+      global: options.global,
+      context: options.context,
+      success: function(data, status, xhr) {
+        success(data);
+        complete();
+      },
+      error: function(xhr) {
+        error(xhr.responseText);
+      },
+      complete: complete
+    });
+  };
+
+  // do an AJAX delete
+  var del = function(url, options) {
+    var complete = options.complete || noop;
+    var success = options.success || noop;
+    var error = options.error || noop;
+    $.ajax({
+      type: 'DELETE',
+      url: url,
+      dataType: options.dataType || 'text',
+      timeout: options.timeout,
+      headers: options.headers,
+      async: options.async || true,
+      global: options.global || true,
+      context: options.context,
+      success: function(data, status, xhr) {
+        success(data);
+        complete();
+      },
+      error: function(xhr) {
+        error(xhr.responseText);
+      },
+      complete: complete
+    });
+  };
+
   var exports = {
     fetch: fetch,
     save: save,
     get: get,
-    post: post
+    post: post,
+    put: put,
+    'delete': del
   };
 
   app.registerModule('data', exports);
