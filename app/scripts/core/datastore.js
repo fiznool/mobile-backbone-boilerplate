@@ -71,20 +71,48 @@ define(function(require){
 
   var set = function(key, value, options) {
     var store = getStore(options);
-    store.setItem(key, value);
+    var i, lim;
+    if(_.isArray(key)) {
+      // we're saving an array of things!
+      lim = Math.max(key.length, value.length);
+      for(i = 0; i < lim; i += 1) {
+        store.setItem(key[i], value[i]);
+      }
+    }
+    else {
+      store.setItem(key, value);
+    }
   };
 
   var withValue = function(key, callback, options){
     var store;
+    var map;
     if (_.isFunction(callback)) {
       store = getStore(options);
-      callback.apply(callback, [store.getItem(key)]);
+      if(_.isArray(key)) {
+        // we got an array of keys, so return an array of values
+        callback.call(options.context || callback,
+          _.map(key, function(k) {
+            return store.getItem(k);
+          }));
+      }
+      else {
+        callback.call(options.context || callback, store.getItem(key));
+      }
     }
   };
 
   var remove = function(key, options) {
     var store = getStore(options);
-    store.removeItem(key);
+    var i;
+    if(_.isArray(key)) {
+      for(i = 0; i < key.length; i += 1) {
+        store.removeItem(key[i]);
+      }
+    }
+    else {
+      store.removeItem(key);
+    }
   };
 
   var exports = {
