@@ -1,6 +1,6 @@
 /*
  * Recognizr
- * v0.2.0
+ * v0.3.0
  *
  * A small library to detect the capabilities of mobile web browsers.
  *
@@ -51,34 +51,39 @@
     // UA regexes from https://raw.github.com/tobie/ua-parser/master/regexes.yaml
     var webkit = ua.match(/AppleWebKit\/([0-9]+)/);
     var wkversion = webkit && webkit[1];
+    var ios = ua.match(/OS (\d+)_(\d+)(?:_(\d+))?.*AppleWebKit/);
+    var iosversion = ios && ios.slice(1);
     // android versions are required because 2.2-3.2 have the same webkit version
     var android = ua.match(/Android (\d+)\.(\d+)(?:[.\-]([a-z0-9]+))?/);
     var androidversion = android && android.slice(1);
-    var msie = ua.match(/MSIE ([0-9]+).*IEMobile/);
-    var msieversion = msie && msie[1];
-    var blackberry = ua.match(/Blackberry.*Version\/([0-9]+)/);
-    var bbversion = blackberry && blackberry[1];
-    var firefox = ua.match(/rv:(\d+)(\d+).*Firefox/);
+    var msie = ua.match(/MSIE (\d+)\.(\d+).*IEMobile/);
+    var msieversion = msie && msie.slice(1);
+    var blackberry = ua.match(/Blackberry.*Version\/(\d+)\.(\d+)(?:\.(\d+))?/);
+    var bbversion = blackberry && blackberry.slice(1);
+    var firefox = ua.match(/rv:(\d+)\.(\d+).*Firefox/);
     var ffversion = firefox && firefox.slice(1);
+    var chrome = ua.match(/Chrome\/(\d+)\.(\d+)/) || ua.match(/Chromium\/(\d+)\.(\d+)/);
+    var chromeversion = chrome && chrome.slice(1);
 
-    // iOS: Mobile Safari
+    // iOS: Mobile Safari or Chrome for iOS
     if (ua.indexOf("iPhone") > -1 || ua.indexOf("iPad") > -1 || ua.indexOf("iPod") > -1) {
-      if (wkversion && wkversion >= 534) {
+      if (iosversion[0] >= 5) {
         // iOS 5/6
         // Supports pos:fixed but needs to be disabled when forms are present
         // as toolbars will start scrolling inline when form elements are active
-        return _buildReturnObj('safari', '5+', 'fixed', 'inline', true, true);
-
-      } else if(wkversion && wkversion >= 533) {
+        return _buildReturnObj('safari', iosversion, 'fixed', 'inline', true, true);
+        
+      } else if(iosversion[0] >= 4) {
         // iOS 4.x
         // We no longer like iScroll, so scroll inline. Animations are out, too.
-        return _buildReturnObj('safari', '4', 'inline', 'inline', false, true);
+        return _buildReturnObj('safari', iosversion, 'inline', 'inline', false, true);
+
       } else {
         // iOS < 4
         // Now audio is out.
-        return _buildReturnObj('safari', '3-', 'inline', 'inline', false, false);
-      }
+        return _buildReturnObj('safari', iosversion, 'inline', 'inline', false, false);
 
+      }
     }
 
     // FIREFOX
@@ -88,41 +93,53 @@
     if (firefox) {
       // as of FF16, nearly good enough for fixed forms: the footer does not return to
       // the bottom of the page after the keyboard is hidden until the page is scrolled
-      return _buildReturnObj('firefox', '', 'fixed', 'inline', true, true);
+      return _buildReturnObj('firefox', ffversion, 'fixed', 'inline', true, true);
+
     }
 
     // ANDROID: Stock Browser
     if (ua.indexOf('Android') > -1) {
-      if (wkversion && wkversion >= 534) {
-        // Android 4+
-        // Supports pos:fixed but needs to be disabled when forms are present
-        // as input element scrolls on top of the toolbar.
-        // Animations are OK.
-        return _buildReturnObj('android', '4+', 'fixed', 'inline', true, true);
+      if(androidversion[0] >= 4) {
+        if(androidversion[0] >= 5 || androidversion[1] >= 1) {
+          // 4.1 (jellybean) or higher; TODO: check form scrolling
+           return _buildReturnObj('android', androidversion, 'fixed', 'inline', true, true);
 
-      } else if (wkversion && wkversion >= 533) {
-        if(androidversion[0] > 2 || androidversion[1] > 2) {
+        } else {
+          // 4.0 (ice-cream sandwich)
+          // Supports pos:fixed but needs to be disabled when forms are present
+          // as input element scrolls on top of the toolbar.
+          // Animations are OK.
+          return _buildReturnObj('android', androidversion, 'fixed', 'inline', true, true);
+
+        }
+
+      } else if (wkversion && wkversion >= 533) { // Android 2.2+
+        if(androidversion[0] >= 3 || androidversion[1] >= 3) {
           // Android 2.3 - 3.2
           // Supports pos:fixed but needs to be disabled when forms are present
           // as input element scrolls on top of the toolbar.
           // Animations are disabled.
           // Audio is enabled.
-          return _buildReturnObj('android', '2.3->3.2', 'fixed', 'inline', false, true);
+          return _buildReturnObj('android', androidversion, 'fixed', 'inline', false, true);
+
         } else {
           // Android 2.2
-          // as 2.3 - 3.2, except that audio is disabled.
-          return _buildReturnObj('android', '2.2', 'fixed', 'inline', false, false);
+          // as 2.3 - 3.2, except that audio is disabled, and use inline scrolling.
+          return _buildReturnObj('android', androidversion, 'inline', 'inline', false, false);
+
         }
       } else {
         // Sucky Android version. Minimal anything.
-        return _buildReturnObj('android', '2.1-', 'inline', 'inline', false, false);
+        return _buildReturnObj('android', androidversion, 'inline', 'inline', false, false);
+
       }
     }
 
     // CHROME / CHROMIUM
     // Well supported, even form fields can be scrolled.
     if (ua.indexOf('Chrome') > -1 || ua.indexOf('Chromium') > -1) {
-      return _buildReturnObj('chrome', '1+', 'fixed', 'fixed', true, true);
+      return _buildReturnObj('chrome', chromeversion, 'fixed', 'fixed', true, true);
+
     }
 
     // EVERYTHING ELSE
