@@ -3,14 +3,14 @@ require.config({
 
   paths: {
     // JavaScript folders.
-    libs: "../assets/js/libs",
-    plugins: "../assets/js/plugins",
-    vendor: "../assets/vendor",
+    libs: "../../assets/js/libs",
+    plugins: "../../assets/js/plugins",
+    vendor: "../../assets/vendor",
 
     // Libraries.
-    jquery: "../assets/js/libs/jquery",
-    lodash: "../assets/js/libs/lodash",
-    backbone: "../assets/js/libs/backbone"
+    jquery: "../../assets/js/libs/jquery",
+    lodash: "../../assets/js/libs/lodash",
+    backbone: "../../assets/js/libs/backbone"
   },
 
   shim: {

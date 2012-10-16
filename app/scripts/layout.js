@@ -5,9 +5,13 @@ define(function(require) {
   var Backbone = require('backbone');
 
   require('plugins/backbone.layoutmanager');
-  require('plugins/backbone.super');
 
   var app = require('app');
+
+  // Set _ template settings
+  _.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+  };
 
   // Localize or create a new JavaScript Template object.
   var JST = {};
@@ -44,18 +48,14 @@ define(function(require) {
     }
   });
 
-  // Create some helper base objects for scaffolding with.
-  var Scaffold = {
-    Model: Backbone.Model.extend({}),
-    Collection: Backbone.Collection.extend({}),
-    View: Backbone.LayoutView.extend({})
-  };
-
   return {
-    Scaffold: Scaffold,
+
+    init: function(container) {
+      this.$container = $(container);
+    },
 
     // Helper for using layouts.
-    useLayout: function(name, options) {
+    use: function(name, options) {
       // If already using this Layout, then don't re-inject into the DOM.
       if (this.layout && this.layout.options.template === name) {
         return this.layout;
@@ -74,7 +74,7 @@ define(function(require) {
       }, options));
 
       // Insert into the DOM.
-      $("#main").empty().append(layout.el);
+      this.$container.empty().append(layout.el);
 
       // Render the layout.
       layout.render();
