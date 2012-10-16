@@ -1,12 +1,7 @@
-require([
-  // Application.
-  "app",
+define(function(require) {
 
-  // Main Router.
-  "router"
-],
-
-function(app, Router) {
+  var app = require('app');
+  var Router = require('router');
 
   // Define your master router on the application namespace and trigger all
   // navigation from this instance.
