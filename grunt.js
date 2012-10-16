@@ -158,7 +158,7 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
       // Include the main configuration file.
-      mainConfigFile: "app/config.js",
+      mainConfigFile: "app/scripts/config.js",
 
       // Output file.
       out: "dist/debug/require.js",
