@@ -7,7 +7,7 @@ define(function(require) {
   // creation.
   var app = {
     // The root path to run the application.
-    root: "/"
+    root: ""
   };
 
   // Convenience function for registering a method as an event
