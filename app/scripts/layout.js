@@ -5,6 +5,7 @@ define(function(require) {
   var Backbone = require('backbone');
 
   require('plugins/backbone.layoutmanager');
+  require('plugins/backbone.super');
 
   var app = require('app');
 
@@ -43,7 +44,16 @@ define(function(require) {
     }
   });
 
+  // Create some helper base objects for scaffolding with.
+  var Scaffold = {
+    Model: Backbone.Model.extend({}),
+    Collection: Backbone.Collection.extend({}),
+    View: Backbone.LayoutView.extend({})
+  };
+
   return {
+    Scaffold: Scaffold,
+
     // Helper for using layouts.
     useLayout: function(name, options) {
       // If already using this Layout, then don't re-inject into the DOM.

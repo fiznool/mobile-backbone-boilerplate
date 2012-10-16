@@ -21,7 +21,9 @@ require.config({
     },
 
     // Backbone.LayoutManager depends on Backbone.
-    "plugins/backbone.layoutmanager": ["backbone"]
+    "plugins/backbone.layoutmanager": ["backbone"],
+
+    "plugins/backbone.super": ["backbone"]
   }
 
 });

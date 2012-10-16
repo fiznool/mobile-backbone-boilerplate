@@ -26,7 +26,11 @@ define(function(require) {
 
   // Mix Backbone.Events into the app object.
   return _.extend(app, {
-    
+    // Create a custom object with a nested Views object.
+    module: function(additionalProps) {
+      return _.extend({ Views: {} }, additionalProps);
+    },
+
     // A way to register modules for application-wide events.
     register: function(namespace, module, context) {
       if (!context) {
@@ -43,3 +47,4 @@ define(function(require) {
   }, Backbone.Events);
 
 });
+
