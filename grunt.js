@@ -3,6 +3,8 @@
 // https://github.com/cowboy/grunt/blob/master/docs/configuring.md
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-compass');
+
   grunt.initConfig({
 
     // The clean task ensures all files are removed from the dist/ directory so
@@ -51,6 +53,28 @@ module.exports = function(grunt) {
     // remove this, ensure concat is updated accordingly.
     handlebars: {
       "dist/debug/templates.js": ["app/templates/**/*.html"]
+    },
+
+    // Uses the compass grunt plugin as found here:
+    // https://github.com/kahlil/grunt-compass
+    compass: {
+      dev: {
+        src: 'app/styles',
+        dest: 'assets/css',
+        linecomments: true,
+        forcecompile: true,
+        debugsass: false,
+        relativeassets: true
+      },
+      prod: {
+        src: 'app/styles',
+        dest: 'assets/css',
+        outputstyle: 'compressed',
+        linecomments: false,
+        forcecompile: true,
+        debugsass: false,
+        relativeassets: true
+      }
     },
 
     // The concatenate task is used here to merge the almond require/define
@@ -187,8 +211,8 @@ module.exports = function(grunt) {
     // available to compile CSS if you are unable to use the runtime compiler
     // (use if you have a custom server, PhoneGap, Adobe Air, etc.)
     watch: {
-      files: ["grunt.js", "assets/**/*", "app/**/*"],
-      tasks: "styles"
+      files: ["app/styles/**/*.scss"],
+      tasks: "compass:dev"
     }
 
   });
