@@ -3,15 +3,10 @@ define(function(require) {
   var $ = require('jquery');
   var _ = require('lodash');
   var Backbone = require('backbone');
-
-  require('plugins/backbone.layoutmanager');
-
+                 require('plugins/backbone.layoutmanager');
+  var Handlebars = require("handlebars");
+  
   var app = require('app');
-
-  // Set _ template settings
-  _.templateSettings = {
-    interpolate : /\{\{(.+?)\}\}/g
-  };
 
   // Localize or create a new JavaScript Template object.
   var JST = {};
@@ -33,18 +28,24 @@ define(function(require) {
       // Concatenate the file extension.
       path = path + ".html";
 
-      // If cached, use the compiled template.
-      if (JST[path]) {
-        return JST[path];
-      } else {
-        // Put fetch into `async-mode`.
+      // If the template has not been loaded yet, then load.
+      if (!JST[path]) {
         done = this.async();
-
-        // Seek out the template asynchronously.
         return $.ajax({ url: app.root + path }).then(function(contents) {
-          done(JST[path] = _.template(contents));
+          JST[path] = Handlebars.compile(contents);
+          JST[path].__compiled__ = true;
+
+          done(JST[path]);
         });
       }
+
+      // If the template hasn't been compiled yet, then compile.
+      if (!JST[path].__compiled__) {
+        JST[path] = Handlebars.template(JST[path]);
+        JST[path].__compiled__ = true;
+      }
+      
+      return JST[path];
     }
   });
 

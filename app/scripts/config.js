@@ -10,7 +10,8 @@ require.config({
     // Libraries.
     jquery: "../../assets/js/libs/jquery",
     lodash: "../../assets/js/libs/lodash",
-    backbone: "../../assets/js/libs/backbone"
+    backbone: "../../assets/js/libs/backbone",
+    handlebars: "../../assets/js/libs/handlebars"
   },
 
   shim: {
@@ -20,9 +21,15 @@ require.config({
       exports: "Backbone"
     },
 
+    // Handlebars has no dependencies.
+    handlebars: {
+      exports: "Handlebars"
+    },
+
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
 
+    // Backbone.Super depends on Backbone.
     "plugins/backbone.super": ["backbone"]
   }
 

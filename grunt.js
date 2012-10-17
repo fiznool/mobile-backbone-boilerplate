@@ -157,8 +157,7 @@ module.exports = function(grunt) {
         // Map `server:debug` to `debug` folders.
         folders: {
           "app": "dist/debug",
-          "assets/js/libs": "dist/debug",
-          "assets/css": "dist/debug"
+          "assets/js/libs": "dist/debug"
         }
       },
 
@@ -191,7 +190,12 @@ module.exports = function(grunt) {
       name: "config",
 
       // Do not wrap everything in an IIFE.
-      wrap: false
+      wrap: false,
+
+      // Build Handlebars runtime, instead of full version.
+      paths: {
+        handlebars: "assets/js/libs/handlebars.runtime"
+      }
     },
 
     // The headless QUnit testing environment is provided for "free" by Grunt.
@@ -218,11 +222,11 @@ module.exports = function(grunt) {
   });
 
   // The debug task will remove all contents inside the dist/ folder, lint
-  // all your code, precompile all the underscore templates into
+  // all your code, precompile all the Handlebars templates into
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("debug", "clean lint jst requirejs concat styles");
+  grunt.registerTask("debug", "clean lint handlebars requirejs concat compass:dev");
 
   // The release task will run the debug tasks and then minify the
   // dist/debug/require.js file and CSS files.
