@@ -16,7 +16,7 @@ define(function(require) {
     },
 
     index: function() {
-      layout.use('index');
+      layout.use('hello');
     }
   });
 
