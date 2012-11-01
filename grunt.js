@@ -59,21 +59,18 @@ module.exports = function(grunt) {
     // https://github.com/kahlil/grunt-compass
     compass: {
       dev: {
-        src: 'app/styles',
-        dest: 'assets/css',
-        linecomments: true,
-        forcecompile: true,
-        debugsass: false,
-        relativeassets: true
+        config: 'config.rb'
       },
-      prod: {
+      debug: {
         src: 'app/styles',
-        dest: 'assets/css',
-        outputstyle: 'compressed',
-        linecomments: false,
-        forcecompile: true,
-        debugsass: false,
-        relativeassets: true
+        dest: 'dist/debug',
+        config: 'config.rb'
+      },
+      release: {
+        environment: 'production',
+        src: 'app/styles',
+        dest: 'dist/release',
+        config: 'config.rb'
       }
     },
 
@@ -117,7 +114,7 @@ module.exports = function(grunt) {
         src: "assets/css/index.css",
 
         // The relative path to use for the @imports.
-        paths: ["assets/css"],
+        //paths: ["assets/css"],
 
         // Additional production-only stylesheets here.
         additional: []
@@ -147,10 +144,16 @@ module.exports = function(grunt) {
     //  To learn more about using the server task, please refer to the code
     //  until documentation has been written.
     server: {
+      // This makes it easier for deploying, by defaulting to any IP.
+      host: "0.0.0.0",
+
       // Ensure the favicon is mapped correctly.
       files: { "favicon.ico": "favicon.ico" },
 
       debug: {
+        // This makes it easier for deploying, by defaulting to any IP.
+        host: "0.0.0.0",
+        
         // Ensure the favicon is mapped correctly.
         files: "<config:server.files>",
 
@@ -193,8 +196,9 @@ module.exports = function(grunt) {
       wrap: false,
 
       // Build Handlebars runtime, instead of full version.
+      // Path is relative to requirejs base path (app/scripts)
       paths: {
-        handlebars: "assets/js/libs/handlebars.runtime"
+        handlebars: "../../assets/js/libs/handlebars.runtime"
       }
     },
 
@@ -221,15 +225,18 @@ module.exports = function(grunt) {
 
   });
 
-  // The debug task will remove all contents inside the dist/ folder, lint
+  // The prepare task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the Handlebars templates into
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("debug", "clean lint handlebars requirejs concat compass:dev");
+  grunt.registerTask("prepare", "clean lint handlebars requirejs concat");
 
-  // The release task will run the debug tasks and then minify the
+  // The debug task will run the prepare tasks and then compile the CSS files.
+  grunt.registerTask("debug", "prepare compass:debug");
+
+  // The release task will run the prepare tasks and then minify the
   // dist/debug/require.js file and CSS files.
-  grunt.registerTask("release", "debug min mincss");
+  grunt.registerTask("release", "prepare min compass:release");
 
 };

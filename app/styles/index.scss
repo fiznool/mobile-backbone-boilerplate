@@ -1,11 +1,5 @@
-@import "core/h5bp";
-
-@include h5bp-normalize;
-@include h5bp-base-styles;
+/* Base styles defined in common 'app' partial */
+@import "app";
 
 /* Module Styles go here */
-@import "app";
 @import "modules/hello";
-
-@include h5bp-helpers;
-@include h5bp-media;

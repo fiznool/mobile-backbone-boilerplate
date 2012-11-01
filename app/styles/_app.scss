@@ -1,1 +1,32 @@
-@import "core/base";
+// Place all app-specific common styles here.
+// Individual styles should live in the 'modules' folder.
+
+@import "base";
+@import "vendor/h5bp";
+
+// H5BP stuff
+@include h5bp-normalize;
+@include h5bp-base-styles;
+@include h5bp-helpers;
+
+// Core layout
+
+* {
+  // apply a natural box layout model to all elements
+  // http://paulirish.com/2012/box-sizing-border-box-ftw/
+  @include box-sizing(border-box);
+}
+
+// Ensure the app fills the screen
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: $background-colour;
+}
+
+#main {
+  padding: 0 10px;
+}
