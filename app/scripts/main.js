@@ -3,12 +3,18 @@ define(function(require) {
   var $ = require('jquery');
   var app = require('app');
   var Router = require('router');
+  var Region = require('region');
 
   $(function() {
-    // Define your master router on the application namespace and trigger all
-    // navigation from this instance.
+    // Define the regions in the page; create a Region for each by passing
+    // in the parent element.
+    var regions = {
+      'main': new Region($('#main'))
+    };
+
+    // Set up the router for the application and pass in the regions.
     app.router = new Router({
-      container: $('#main')
+      regions: regions
     });
 
     // Trigger the initial route, set the
