@@ -30,19 +30,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // The jst task compiles all application templates into JavaScript
-    // functions with the underscore.js template function from 1.2.4.  You can
-    // change the namespace and the template options, by reading this:
-    // https://github.com/gruntjs/grunt-contrib/blob/master/docs/jst.md
-    //
-    // The concat task depends on this file to exist, so if you decide to
-    // remove this, ensure concat is updated accordingly.
-    jst: {
-      "dist/debug/templates.js": [
-        "app/templates/**/*.html"
-      ]
-    },
-
     // The handlebars task compiles all application templates into JavaScript
     // functions using Handlebars templating engine.
     //
@@ -89,35 +76,6 @@ module.exports = function(grunt) {
         dest: "dist/debug/require.js",
 
         separator: ";"
-      }
-    },
-
-    // This task uses the MinCSS Node.js project to take all your CSS files in
-    // order and concatenate them into a single CSS file named index.css.  It
-    // also minifies all the CSS as well.  This is named index.css, because we
-    // only want to load one stylesheet in index.html.
-    mincss: {
-      "dist/release/index.css": [
-        "dist/debug/index.css"
-      ]
-    },
-
-    // This task simplifies working with CSS inside Backbone Boilerplate
-    // projects.  Instead of manually specifying your stylesheets inside the
-    // configuration, you can use `@imports` and this task will concatenate
-    // only those paths.
-    styles: {
-      // Out the concatenated contents of the following styles into the below
-      // development file path.
-      "dist/debug/index.css": {
-        // Point this to where your `index.css` file is location.
-        src: "assets/css/index.css",
-
-        // The relative path to use for the @imports.
-        //paths: ["assets/css"],
-
-        // Additional production-only stylesheets here.
-        additional: []
       }
     },
 

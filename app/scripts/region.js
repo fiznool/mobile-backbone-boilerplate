@@ -9,7 +9,7 @@ define(function(require) {
   var app = require('app');
 
   // Localize or create a new JavaScript Template object.
-  var JST = {};
+  var JST = window.JST = window.JST || {};
 
   // Configure LayoutManager with Backbone Boilerplate defaults.
   Backbone.LayoutManager.configure({
@@ -45,8 +45,8 @@ define(function(require) {
   });
 
   var Region = function(container) {
-      this.$container = $(container);
-    };
+    this.$container = $(container);
+  };
 
   Region.prototype.use = function(name, options) {
     if(this.layout && this.layout.options.template === name) {
