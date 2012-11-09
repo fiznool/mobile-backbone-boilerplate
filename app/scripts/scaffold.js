@@ -148,7 +148,7 @@ define(function(require) {
         if (this.currentActivity &&
           (didChangeActivity || didChangeMethod) &&
           this.currentActivity[this.currentMethod].onStop) {
-          this.currentActivity[this.currentMethod].onStop();
+          this.currentActivity[this.currentMethod].onStop.apply(this.currentActivity);
         }
 
         if (this.currentActivity && didChangeActivity) {
