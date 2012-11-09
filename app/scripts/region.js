@@ -65,7 +65,7 @@ define(function(require) {
     }, options));
 
     // Render the layout.
-    //layout.render();
+    layout.render();
 
     this.$container.empty().html(layout.el);
 
@@ -76,22 +76,16 @@ define(function(require) {
     return layout;
   };
 
-  Region.prototype.update = function(name, views, append) {
-    
-    // handle update(views)
-    if (typeof views === 'undefined') {
-      views = name;
-      name = '';
-    }
+  Region.prototype.setView = function() {
+    this.layout.setView.apply(this.layout, Array.prototype.slice.call(arguments));
+  };
 
-    // views could be a single view - check to see.
-    if (views instanceof Backbone.View) {
-      this.layout.setView(name, views, append);
-    } else {
-      this.layout.setViews(views);
-    }
+  Region.prototype.setViews = function() {
+    this.layout.setViews.apply(this.layout, Array.prototype.slice.call(arguments));
+  };
 
-    this.layout.render();
+  Region.prototype.update = function(view) {
+      this.layout.setView(view);
   };
 
   Region.prototype.empty = function() {
