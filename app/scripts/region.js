@@ -44,57 +44,7 @@ define(function(require) {
     }
   });
 
-  var Region = function(container) {
-    this.$container = $(container);
-  };
-
-  Region.prototype.use = function(name, options) {
-    if(this.layout && this.layout.options.template === name) {
-      return this.layout;
-    }
-
-    // If a layout already exists, remove it from the DOM.
-    if(this.layout) {
-      this.layout.remove();
-    }
-
-    // Create a new Layout with options.
-    var layout = new Backbone.Layout(_.extend({
-      template: name,
-      className: 'layout ' + name
-    }, options));
-
-    // Render the layout.
-    layout.render();
-
-    this.$container.empty().html(layout.el);
-
-    // Cache the refererence.
-    this.layout = layout;
-
-    // Return the reference, for chainability.
-    return layout;
-  };
-
-  Region.prototype.setView = function() {
-    this.layout.setView.apply(this.layout, Array.prototype.slice.call(arguments));
-  };
-
-  Region.prototype.setViews = function() {
-    this.layout.setViews.apply(this.layout, Array.prototype.slice.call(arguments));
-  };
-
-  Region.prototype.update = function(view) {
-      this.layout.setView(view);
-  };
-
-  Region.prototype.empty = function() {
-    if(this.layout) {
-      this.layout.remove();
-      this.layout = undefined;
-    }
-  };
-
-  return Region;
+  // Region is Layout
+  return Backbone.Layout;
 
 });

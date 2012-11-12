@@ -9,12 +9,13 @@ define(function(require) {
     // Define the regions in the page; create a Region for each by passing
     // in the parent element.
     var regions = {
-      'main': new Region($('#main'))
+      'main': new Region({ el: '#main' })
     };
 
     // Set up the router for the application and pass in the regions.
     app.router = new Router({
-      regions: regions
+      regions: regions,
+      el: '#app'
     });
 
     // Trigger the initial route, set the

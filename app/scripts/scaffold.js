@@ -1,6 +1,7 @@
 define(function(require) {
 
   var app = require('app');
+  var $ = require('jquery');
   var _ = require('lodash');
   var Backbone = require('backbone');
   
@@ -10,41 +11,86 @@ define(function(require) {
   
   // Activity constructor
   var Activity = function(options) {
+    // both _configure and initialize are stubs
     this._configure(options || {});
     this.initialize.apply(this, arguments);
   };
 
+  // mix events into the prototype
   _.extend(Activity.prototype, Backbone.Events, {
-    // an object containing the regions in the app
+
+    // regions is a map from region names to region objects.
+    // Setup is handled by the base Scaffold.Router's constructor.
+    // This object will be the same for all activities associated with the same router.
     regions: {},
+
+    // _configure is an empty function by default. Override it with your own
+    // configuration logic.
+    _configure: function() {},
 
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
     initialize: function(){},
 
+    // The router uses this value to determine whether to call an activity's onCreate callback
     _initialized: false,
 
+    // updateRegions takes an object of region - View[] pairs.
+    // For each region given, the corresponding views are inserted.
+    // e.g. this.updateRegions({ 'mainRegion': [ fooView, new BarView({}), ... ], ... })
     updateRegions: function(regions) {
       _.each(regions, function(views, regionName) {
         this.updateRegion(regionName, views);
       }, this);
     },
 
+    // updateRegion takes a region and a View[].
+    // The views are inserted into the region, replacing any existing views.
+    // e.g. this.updateRegion('mainRegion', [ fooView, new BarView({}), ... ])
     updateRegion: function(region, views) {
+
+      // retrieve the actual region by its name
       region = this.regions[region];
-      _.each(views, function(view, index) {
-        region.setView(view, index !== 0);
-        view.render();
-      });
+
+      // wrap a single view in an array
+      if (views instanceof Backbone.View) {
+        views = [ views ];
+      }
+      
+      // if no views were given, clear the region
+      if (!views || views.length === 0) {
+        
+        // remove all of the child views from the region
+        region._removeViews(true);
+      
+      }
+
+      else {
+
+        // insert the given views into the region
+        _.each(views, function(view, index) {
+          // on the first iteration, set append to false to clear the region
+          // on all other iterations, set append to true
+          region.setView(view, index !== 0);
+          
+        });
+
+        // render the views in a separate loop to keep all the DOM interaction together
+        _.each(views, function(view) {
+          view.render();
+        });
+      
+      }
     },
-    
-    _configure: function() {},
+
+    // callback stubs
     onCreate: function() {},
     onStart: function() {},
     onStop: function() {}
+    
   });
 
-  // use backbone's extend
+  // use backbone's extend (referencing via View here, but they're all the same)
   Activity.extend = Backbone.View.extend;
 
   return {
@@ -104,13 +150,11 @@ define(function(require) {
 
         options = options || {};
 
-        this.regions = options.regions;
-        _.each(this.regions, function(value, key) {
-          if(key !== 'main') {
-            value.use('empty');
-          }
-        });
+        this.$el = $(options.el);
 
+        this.regions = options.regions;
+
+        // create a route for each entry in each activity's routes object
         _.each(this.activities, function(activity, name) {
           _.each(activity.routes, function(methodName, route) {
             this.route(route, name + '-' + methodName, _.bind(function() {
@@ -119,25 +163,36 @@ define(function(require) {
           }, this);
         }, this);
 
+        // set up the default route
         this.route('', this.defaultRoute.activityName + '-' + this.defaultRoute.methodName, _.bind(function() {
           this.didRoute(this.defaultRoute.activity, this.defaultRoute.methodName, Array.prototype.slice.apply(arguments));
         }, this));
 
         if(this.responsive) {
-          app.on('screen:resize', function(name) {
-            this.currentLayout = name;
-            this.regions.main.use(name);
-            if(this.currentActivity) {
-              this.currentActivity[this.currentMethod][this.currentLayout].apply(this.currentActivity, this.currentArgs);
-            }
-          }, this);
+          app.on('screen:resize', this.setLayout, this);
         }
         else {
-          // define the layout to use for main in non-responsive mode
-          this.regions.main.use('empty');
+          this.setLayout('default');
         }
 
+        // manually call the superclass constructor
         Backbone.Router.prototype['constructor'].call(this, options);
+      },
+
+      setLayout: function(name) {
+        
+        // update the layout class on the parent element
+        if (this.$el) {
+          this.$el.removeClass('layout-' + this.currentLayout).addClass('layout-' + name);
+        }
+        
+        this.currentLayout = name;
+        
+        // if the current activity's current method has a function for the new layout, invoke it
+        if (this.currentActivity &&
+          this.currentActivity[this.currentMethod][this.currentLayout]) {
+          this.currentActivity[this.currentMethod][this.currentLayout].apply(this.currentActivity, this.currentArgs);
+        }
       },
 
       // Handle the activity lifecycle
