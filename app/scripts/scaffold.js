@@ -70,7 +70,6 @@ define(function(require) {
 
       // render the views in a separate loop to keep all the DOM interaction together
       _.each(views, function(view) {
-        console.log('rendering ', region, view);
         view.render();
       });
 
