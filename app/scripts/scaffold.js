@@ -39,6 +39,7 @@ define(function(require) {
     // For each region given, the corresponding views are inserted.
     // e.g. this.updateRegions({ 'mainRegion': [ fooView, new BarView({}), ... ], ... })
     updateRegions: function(regions) {
+      console.log(regions);
       _.each(regions, function(views, regionName) {
         this.updateRegion(regionName, views);
       }, this);
@@ -56,38 +57,30 @@ define(function(require) {
       if (views instanceof Backbone.View) {
         views = [ views ];
       }
-      
-      // if no views were given, clear the region
-      if (!views || views.length === 0) {
-        
-        // remove all of the child views from the region
-        region._removeViews(true);
-      
-      }
 
-      else {
+      // remove all of the child views from the region
+      region._removeViews(true);
 
-        // insert the given views into the region
-        _.each(views, function(view, index) {
-          // on the first iteration, set append to false to clear the region
-          // on all other iterations, set append to true
-          region.setView(view, index !== 0);
-          
-        });
+      // insert the given views into the region
+      _.each(views, function(view) {
+        // on the first iteration, set append to false to clear the region
+        // on all other iterations, set append to true
+        region.setView(view, true);
+      });
 
-        // render the views in a separate loop to keep all the DOM interaction together
-        _.each(views, function(view) {
-          view.render();
-        });
-      
-      }
+      // render the views in a separate loop to keep all the DOM interaction together
+      _.each(views, function(view) {
+        console.log('rendering ', region, view);
+        view.render();
+      });
+
     },
 
     // callback stubs
     onCreate: function() {},
     onStart: function() {},
     onStop: function() {}
-    
+
   });
 
   // use backbone's extend (referencing via View here, but they're all the same)
