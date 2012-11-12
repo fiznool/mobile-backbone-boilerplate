@@ -68,10 +68,8 @@ define(function(require) {
         region.setView(view, true);
       });
 
-      // render the views in a separate loop to keep all the DOM interaction together
-      _.each(views, function(view) {
-        view.render();
-      });
+      // render the region and all of its views
+      region.render();
 
     },
 
