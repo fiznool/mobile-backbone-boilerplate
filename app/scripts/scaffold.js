@@ -58,19 +58,18 @@ define(function(require) {
         views = [ views ];
       }
 
-      // remove all of the child views from the region
+      // remove the views that were present previously
       region._removeViews(true);
 
-      // insert the given views into the region
-      _.each(views, function(view) {
-        // on the first iteration, set append to false to clear the region
-        // on all other iterations, set append to true
-        region.setView(view, true);
+      // set hasRendered to false so that LM doesn't ditch the new views when render is called
+      region.__manager__.hasRendered = false;
+
+      region.setViews({
+        '': views
       });
 
       // render the region and all of its views
       region.render();
-
     },
 
     // callback stubs
