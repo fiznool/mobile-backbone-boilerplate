@@ -45,8 +45,14 @@ define(function(require) {
 
     // updateRegion takes a region and either a view or an object with a template and a views object.
     // The views are inserted into the region, replacing any existing views.
+    //
     // Example: passing a single view:
     //   updateRegion('main', view);
+    //
+    // Example: passing an array of views (note that if the views' templates are not cached and differ
+    //  then LM does not guarantee that the views will be inserted into the document in order):
+    //   updateRegion('main', [ myView, myOtherView ])
+    //
     // Example: passing an object of views:
     //   updateRegion('main', {
     //     template: 'mytemplate',
@@ -54,6 +60,7 @@ define(function(require) {
     //       '.myclass': myView
     //     }
     //   })
+    //
     updateRegion: function(region, views) {
 
       // retrieve the actual region by its name
