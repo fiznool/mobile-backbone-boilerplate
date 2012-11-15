@@ -214,6 +214,9 @@ define(function(require) {
       region._removeViews(true);
       region.__manager__.hasRendered = false;
 
+      // reset the template for the region for the first two cases (given a view; given an array of views)
+      region.template = undefined;
+
       // if we have a single view, insert it directly into the region
       if (views instanceof Backbone.View) {
         region.insertView('', views);
@@ -227,12 +230,10 @@ define(function(require) {
         });
       }
       
-      // if we do not have a view, we create a new view to use as the wrapper for the given views,
-      // and insert the given views into it
+      // set the template of the region and then insert the views into their places
       else {
-        var wrapperView = new Scaffold.View({ template: views.template});
-        region.insertView('', wrapperView);
-        wrapperView.insertViews(views.views);
+        region.template = views.template;
+        region.setViews(views.views);
       }
 
       // render the region and all of its views
