@@ -35,38 +35,54 @@ define(function(require) {
     // The router uses this value to determine whether to call an activity's onCreate callback
     _initialized: false,
 
-    // updateRegions takes an object of region - View[] pairs.
-    // For each region given, the corresponding views are inserted.
-    // e.g. this.updateRegions({ 'mainRegion': [ fooView, new BarView({}), ... ], ... })
+    // updateRegions takes an object of regions by name
+    // For each region given, the corresponding views are inserted. See updateRegion below for details.
     updateRegions: function(regions) {
-      console.log(regions);
       _.each(regions, function(views, regionName) {
         this.updateRegion(regionName, views);
       }, this);
     },
 
-    // updateRegion takes a region and a View[].
+    // updateRegion takes a region and either a view or an object with a template and a views object.
     // The views are inserted into the region, replacing any existing views.
-    // e.g. this.updateRegion('mainRegion', [ fooView, new BarView({}), ... ])
+    // Example: passing a single view:
+    //   updateRegion('main', view);
+    // Example: passing an object of views:
+    //   updateRegion('main', {
+    //     template: 'mytemplate',
+    //     views: {
+    //       '.myclass': myView
+    //     }
+    //   })
     updateRegion: function(region, views) {
 
       // retrieve the actual region by its name
       region = this.regions[region];
 
-      // wrap a single view in an array
-      if (views instanceof Backbone.View) {
-        views = [ views ];
-      }
-
-      // remove the views that were present previously
+      // beware: hacks; we need to remove the views that were present previously
+      // also set hasRendered to false so that LM doesn't ditch the new views when render is called
       region._removeViews(true);
-
-      // set hasRendered to false so that LM doesn't ditch the new views when render is called
       region.__manager__.hasRendered = false;
 
-      region.setViews({
-        '': views
-      });
+      // if we have a single view, insert it directly into the region
+      if (views instanceof Backbone.View) {
+        region.insertView('', views);
+      }
+
+      // if we have an array of views, insert them
+      // beware: if the templates for the views are different then LM may not render them in order!
+      else if (_.isArray(views)) {
+        region.setViews({
+          '': views
+        });
+      }
+      
+      // if we do not have a view, we create a new view to use as the wrapper for the given views,
+      // and insert the given views into it
+      else {
+        region.insertView('', new Backbone.View({ template: views.template}));
+        region.insertViews(views.views);
+      }
 
       // render the region and all of its views
       region.render();
@@ -217,10 +233,10 @@ define(function(require) {
           this.currentActivity[this.currentMethod].onStart.apply(this.currentActivity, this.currentArgs);
         }
 
-        if(this.responsive &&
-          this.currentActivity[this.currentMethod][this.currentLayout]) {
+        if(this.currentActivity[this.currentMethod][this.currentLayout]) {
           this.currentActivity[this.currentMethod][this.currentLayout].apply(this.currentActivity, this.currentArgs);
         }
+
       }
     })
   };
