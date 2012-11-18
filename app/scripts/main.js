@@ -1,6 +1,7 @@
 define(function(require) {
 
   var $ = require('jquery');
+  var FastClick = require('fastclick');
   var app = require('app');
   var Router = require('router');
   var Region = require('region');
@@ -17,6 +18,9 @@ define(function(require) {
       regions: regions,
       el: '#app'
     });
+
+    // Setup FastClick to prevent 300ms button delay
+    new FastClick(document.getElementById('app'));
 
     // Trigger the initial route, set the
     // root folder to '' by default.  Change in app.js.

@@ -11,7 +11,8 @@ require.config({
     jquery: "../../assets/js/libs/jquery",
     lodash: "../../assets/js/libs/lodash",
     backbone: "../../assets/js/libs/backbone",
-    handlebars: "../../assets/js/libs/handlebars"
+    handlebars: "../../assets/js/libs/handlebars",
+    fastclick: "../../assets/js/libs/fastclick"
   },
 
   shim: {
