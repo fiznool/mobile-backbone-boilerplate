@@ -3,8 +3,20 @@
 // For this reason, it should contain definitions only - no explicit styles.
 // Otherwise, these styles will be repeated within the stylesheet.
 
+$legacy-support-for-ie: false;
+$legacy-support-for-mozilla: false;
+
+$experimental-support-for-opera: false;
+$experimental-support-for-microsoft: false;
+
 // Variables go first - use to override any in imports below
 $background-colour: #ddd;
+
+$headerbar-height: 44px;
+$headerbar-font-size: 20px;
+
+$footerbar-height: 44px;
+$footerbar-font-size: 20px;
 
 // Library imports
 // Make sure these libraries are mixins only, no explicit styles

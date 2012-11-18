@@ -1,5 +1,6 @@
-/* Base styles defined in common 'app' partial */
-@import "app";
+/* Base styles defined in common 'core' partial */
+@import "core";
 
 /* Module Styles go here */
+@import "app";
 @import "modules/hello";
