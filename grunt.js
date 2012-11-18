@@ -108,6 +108,8 @@ module.exports = function(grunt) {
       // Ensure the favicon is mapped correctly.
       files: { "favicon.ico": "favicon.ico" },
 
+      folders: { "api": "api" },
+
       debug: {
         // This makes it easier for deploying, by defaulting to any IP.
         host: "0.0.0.0",
@@ -117,6 +119,7 @@ module.exports = function(grunt) {
 
         // Map `server:debug` to `debug` folders.
         folders: {
+          "api": "api",
           "app": "dist/debug",
           "assets/js/libs": "dist/debug"
         }
@@ -131,6 +134,7 @@ module.exports = function(grunt) {
 
         // Map `server:release` to `release` folders.
         folders: {
+          "api": "api",
           "app": "dist/release",
           "assets/js/libs": "dist/release",
           "assets/css": "dist/release"

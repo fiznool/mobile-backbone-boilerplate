@@ -12,6 +12,7 @@ define(function(require) {
     // Define the regions in the page; create a Region for each by passing
     // in the parent element.
     var regions = {
+      'headerbar': new Region({ el: '#headerbar' }),
       'main': new Region({ el: '#main' })
     };
 

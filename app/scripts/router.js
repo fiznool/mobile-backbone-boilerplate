@@ -1,38 +1,20 @@
 define(function(require) {
 
   var Scaffold = require('scaffold');
-
-  var HelloActivity = Scaffold.Activity.extend({
-    views: {
-      Hello: Scaffold.View.extend({
-        template: 'hello'
-      })
-    },
-    hello: {
-      onStart: function() {
-        this.updateRegions({
-          'main': [
-            new this.views.Hello()
-          ]
-        });
-      }
-    },
-    routes: {
-      '!/hello': 'hello'
-    }
-  });
+  var AnimalsList = require('activities/animals-list');
+  var AnimalsDetail = require('activities/animals-detail');
 
   var activities = {
-    'hello': new HelloActivity()
+    'list': new AnimalsList(),
+    'detail': new AnimalsDetail()
   };
 
   var Router = Scaffold.Router.extend({
     activities: activities,
-    responsive: false,
     defaultRoute: {
-      'activity': activities.hello,
-      'activityName': 'hello',
-      'methodName': 'hello'
+      'activity': activities.list,
+      'activityName': 'list',
+      'methodName': 'list'
     }
   });
 
