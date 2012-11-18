@@ -12,11 +12,7 @@ $experimental-support-for-microsoft: false;
 // Variables go first - use to override any in imports below
 $background-colour: #ddd;
 
-$headerbar-height: 44px;
-$headerbar-font-size: 20px;
-
-$footerbar-height: 44px;
-$footerbar-font-size: 20px;
+$footerbar-height: 0;
 
 // Library imports
 // Make sure these libraries are mixins only, no explicit styles

@@ -6,6 +6,8 @@ define(function(require) {
   var Router = require('router');
   var Region = require('region');
 
+  require('core/device');
+
   $(function() {
     // Define the regions in the page; create a Region for each by passing
     // in the parent element.

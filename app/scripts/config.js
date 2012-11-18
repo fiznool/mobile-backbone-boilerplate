@@ -12,7 +12,8 @@ require.config({
     lodash: "../../assets/js/libs/lodash",
     backbone: "../../assets/js/libs/backbone",
     handlebars: "../../assets/js/libs/handlebars",
-    fastclick: "../../assets/js/libs/fastclick"
+    fastclick: "../../assets/js/libs/fastclick",
+    recognizr: "../../assets/js/libs/recognizr"
   },
 
   shim: {
@@ -31,7 +32,9 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
 
     // Backbone.Super depends on Backbone.
-    "plugins/backbone.super": ["backbone"]
+    "plugins/backbone.super": ["backbone"],
+
+    "plugins/tappivate": ["jquery"]
   }
 
 });

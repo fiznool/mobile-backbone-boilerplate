@@ -105,9 +105,7 @@ input[type="search"] {
 
 // Disable default list styling so that nav lists look native-y
 .list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  @include list-style-reset;
 
   a {
     text-decoration: none;
@@ -119,6 +117,15 @@ input[type="search"] {
 
 
 /*************** Toolbars ***************/
+
+$toolbar-default-height: 44px;
+$toolbar-default-font-size: 20px;
+
+$headerbar-height: $toolbar-default-height !default;
+$headerbar-font-size: $toolbar-default-font-size !default;
+$footerbar-height: $toolbar-default-height !default;
+$footerbar-font-size: $toolbar-default-font-size !default;
+
 
 // By default, the toolbars are inline.
 .toolbar {
