@@ -16,6 +16,9 @@ define(function(require) {
     tagName: 'ul',
     template: 'animal-list',
     className: 'list',
+    attributes: {
+      'data-tap': 'list'
+    },
 
     data: function() {
       // Namespace the collection for Handlebars
@@ -29,7 +32,8 @@ define(function(require) {
   });
 
   List.Views.Header = Scaffold.View.extend({
-    template: 'animal-list-header'
+    template: 'animal-list-header',
+    className: 'headerbar-inner'
   });
 
   return Scaffold.Activity.extend({
@@ -43,7 +47,7 @@ define(function(require) {
       onStart: function() {
         // Render the data when the activity starts
         this.updateRegions({
-          //'headerbar': new List.Views.Header(),
+          'headerbar': new List.Views.Header(),
           'main': new List.Views.Main({ collection: this.collection })
         });
         

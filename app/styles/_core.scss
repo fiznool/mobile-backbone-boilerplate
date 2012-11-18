@@ -107,12 +107,26 @@ input[type="search"] {
 .list {
   @include list-style-reset;
 
+  li + li {
+    border-top: 1px solid #bbb;
+  }
+
+  li.active {
+    background-color: $list-active-background-color;
+    color: $list-active-text-colour;
+  }
+
   a {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
     text-decoration: none;
     &:link, &:visited, &:hover, &:active {
       color: inherit;
     }
   }
+
 }
 
 
@@ -133,21 +147,30 @@ $footerbar-font-size: $toolbar-default-font-size !default;
   width: 100%;
   z-index: 2;
   margin: 0;
-  text-align: center;
 }
 
 #headerbar {
   top: 0;
   height: $headerbar-height;
-  line-height: $headerbar-height;
-  font-size: $headerbar-font-size;
+  background-color: $headerbar-background-colour;
+  color: $headerbar-text-colour;
+  .headerbar-title {
+    margin: 0;
+    padding: 0 10px;
+    line-height: $headerbar-height;
+    font-size: $headerbar-font-size;
+  }
 }
 
 #footerbar {
   bottom: 0;
   height: $footerbar-height;
-  line-height: $footerbar-height;
-  font-size: $footerbar-font-size;
+  .footerbar-title {
+    margin: 0;
+    padding: 0 10px;
+    line-height: $footerbar-height;
+    font-size: $footerbar-font-size;
+  }
 }
 
 #main {

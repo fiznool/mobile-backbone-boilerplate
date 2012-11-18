@@ -7,6 +7,7 @@ define(function(require) {
   var Region = require('region');
 
   require('core/device');
+  require('plugins/tappivate');
 
   $(function() {
     // Define the regions in the page; create a Region for each by passing
@@ -24,6 +25,9 @@ define(function(require) {
 
     // Setup FastClick to prevent 300ms button delay
     new FastClick(document.getElementById('app'));
+
+    // Setup tappivate to mimic native button taps
+    $('#app').tappivate();
 
     // Trigger the initial route, set the
     // root folder to '' by default.  Change in app.js.

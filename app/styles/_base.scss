@@ -10,7 +10,11 @@ $experimental-support-for-opera: false;
 $experimental-support-for-microsoft: false;
 
 // Variables go first - use to override any in imports below
-$background-colour: #ddd;
+$background-colour: #efefef;
+$headerbar-background-colour: #028868;
+$headerbar-text-colour: #f0f0f0;
+$list-active-background-color: lighten($headerbar-background-colour, 10%);
+$list-active-text-colour: #f0f0f0;
 
 $footerbar-height: 0;
 

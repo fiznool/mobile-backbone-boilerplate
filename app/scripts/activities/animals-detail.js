@@ -26,6 +26,7 @@ define(function(require) {
 
   Detail.Views.Header = Scaffold.View.extend({
     template: 'animal-detail-header',
+    className: 'headerbar-inner',
     data: function() {
       return this.model.toJSON();
     },
