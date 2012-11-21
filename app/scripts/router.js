@@ -1,8 +1,9 @@
 define(function(require) {
 
+  require('plugins/backbone.activities');
   var Scaffold = require('scaffold');
 
-  var HelloActivity = Scaffold.Activity.extend({
+  var HelloActivity = Backbone.Activity.extend({
     views: {
       Hello: Scaffold.View.extend({
         template: 'hello'
@@ -26,7 +27,7 @@ define(function(require) {
     'hello': new HelloActivity()
   };
 
-  var Router = Scaffold.Router.extend({
+  var Router = Backbone.ActivityRouter.extend({
     activities: activities,
     responsive: false,
     defaultRoute: {

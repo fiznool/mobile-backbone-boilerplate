@@ -31,7 +31,10 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
 
     // Backbone.Super depends on Backbone.
-    "plugins/backbone.super": ["backbone"]
+    "plugins/backbone.super": ["backbone"],
+
+    // Backbone.Activities depends on Backbone.
+    "plugins/backbone.activities": ["backbone"]
   }
 
 });
