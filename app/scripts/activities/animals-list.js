@@ -4,6 +4,7 @@ define(function(require) {
   var Scaffold = require('scaffold');
 
   var List = app.module();
+  require('plugins/backbone.activities');
 
   List.Model = Scaffold.Model.extend({});
 
@@ -36,7 +37,7 @@ define(function(require) {
     className: 'headerbar-inner'
   });
 
-  return Scaffold.Activity.extend({
+  return Backbone.Activity.extend({
 
     initialize: function() {
       // Singleton collection

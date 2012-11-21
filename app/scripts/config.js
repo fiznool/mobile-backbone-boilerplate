@@ -34,7 +34,10 @@ require.config({
     // Backbone.Super depends on Backbone.
     "plugins/backbone.super": ["backbone"],
 
-    "plugins/tappivate": ["jquery"]
+    "plugins/tappivate": ["jquery"],
+
+    // Backbone.Activities depends on Backbone.
+    "plugins/backbone.activities": ["backbone"]
   }
 
 });

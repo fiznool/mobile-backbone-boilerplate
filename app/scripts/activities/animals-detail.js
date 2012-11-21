@@ -4,6 +4,7 @@ define(function(require) {
   var Scaffold = require('scaffold');
 
   var Detail = app.module();
+  require('plugins/backbone.activities');
 
   Detail.Model = Scaffold.Model.extend({
     url: function() {
@@ -36,7 +37,7 @@ define(function(require) {
     }
   });
 
-  return Scaffold.Activity.extend({
+  return Backbone.Activity.extend({
 
     'detail': {
       onStart: function(id) {

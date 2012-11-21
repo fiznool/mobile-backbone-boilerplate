@@ -1,6 +1,8 @@
 define(function(require) {
 
+  require('plugins/backbone.activities');
   var Scaffold = require('scaffold');
+
   var AnimalsList = require('activities/animals-list');
   var AnimalsDetail = require('activities/animals-detail');
 
@@ -9,7 +11,7 @@ define(function(require) {
     'detail': new AnimalsDetail()
   };
 
-  var Router = Scaffold.Router.extend({
+  var Router = Backbone.ActivityRouter.extend({
     activities: activities,
     defaultRoute: {
       'activity': activities.list,
