@@ -14,9 +14,8 @@ define(function(require) {
   var Router = Backbone.ActivityRouter.extend({
     activities: activities,
     defaultRoute: {
-      'activity': activities.list,
       'activityName': 'list',
-      'methodName': 'list'
+      'handlerName': 'list'
     }
   });
 
