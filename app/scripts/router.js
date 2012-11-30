@@ -31,9 +31,8 @@ define(function(require) {
     activities: activities,
     responsive: false,
     defaultRoute: {
-      'activity': activities.hello,
       'activityName': 'hello',
-      'methodName': 'hello'
+      'handlerName': 'hello'
     }
   });
 
