@@ -1,4 +1,5 @@
 dist/
 .sass-cache/
 .DS_Store
+npm-debug.log
 
