@@ -1,10 +1,10 @@
-define(function(require) {
-
-  require('plugins/backbone.activities');
-  var Scaffold = require('scaffold');
-
-  var AnimalsList = require('activities/animals-list');
-  var AnimalsDetail = require('activities/animals-detail');
+define(
+  [
+    "backbone.activities",
+    "activities/animals-list",
+    "activities/animals-detail"
+  ],
+  function(Backbone, AnimalsList, AnimalsDetail) {
 
   var activities = {
     'list': new AnimalsList(),
