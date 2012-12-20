@@ -83,10 +83,10 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
       // Include the main configuration file.
-      mainConfigFile: "app/config.js",
+      mainConfigFile: "app/scripts/config.js",
 
       // Also include the JamJS configuration file.
-      jamConfig: "/vendor/jam/require.config.js",
+      jamConfig: "vendor/jam/require.config.js",
 
       // Output file.
       out: "dist/debug/require.js",
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
       debug: {
         // This makes it easier for deploying, by defaulting to any IP.
         host: "0.0.0.0",
-        
+
         // Ensure the favicon is mapped correctly.
         files: "<config:server.files>",
 
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
     //    dest: "dist/release/index.html"
     //  }
     //},
-    
+
     // This task will copy assets into your build directory,
     // automatically.  This makes an entirely encapsulated build into
     // each directory.

@@ -2068,10 +2068,6 @@ var jam = {
             "main": "./lodash.js"
         },
         {
-            "name": "modernizr",
-            "location": "../../vendor/jam/modernizr"
-        },
-        {
             "name": "underscore",
             "location": "../../vendor/jam/underscore",
             "main": "underscore.js"
@@ -2092,9 +2088,6 @@ var jam = {
                 "lodash"
             ],
             "exports": "Backbone.LayoutManager"
-        },
-        "jquery": {
-            "exports": "jQuery"
         },
         "underscore": {
             "exports": "_"
@@ -2131,10 +2124,6 @@ if (typeof require !== "undefined" && require.config) {
             "main": "./lodash.js"
         },
         {
-            "name": "modernizr",
-            "location": "../../vendor/jam/modernizr"
-        },
-        {
             "name": "underscore",
             "location": "../../vendor/jam/underscore",
             "main": "underscore.js"
@@ -2154,9 +2143,6 @@ if (typeof require !== "undefined" && require.config) {
                 "lodash"
             ],
             "exports": "Backbone.LayoutManager"
-        },
-        "jquery": {
-            "exports": "jQuery"
         },
         "underscore": {
             "exports": "_"
@@ -2193,10 +2179,6 @@ else {
             "main": "./lodash.js"
         },
         {
-            "name": "modernizr",
-            "location": "../../vendor/jam/modernizr"
-        },
-        {
             "name": "underscore",
             "location": "../../vendor/jam/underscore",
             "main": "underscore.js"
@@ -2216,9 +2198,6 @@ else {
                 "lodash"
             ],
             "exports": "Backbone.LayoutManager"
-        },
-        "jquery": {
-            "exports": "jQuery"
         },
         "underscore": {
             "exports": "_"
