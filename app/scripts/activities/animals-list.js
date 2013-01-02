@@ -11,7 +11,7 @@ define(
 
     List.Collection = Scaffold.Collection.extend({
       model: List.Model,
-      url: 'api/animals.json'
+      url: '/api/animals'
     });
 
     List.Views.Main = Scaffold.View.extend({
@@ -52,7 +52,7 @@ define(
             'headerbar': new List.Views.Header(),
             'main': new List.Views.Main({ collection: this.collection })
           });
-          
+
           this.collection.fetch();
 
         }

@@ -10,7 +10,7 @@ define(
 
     Detail.Model = Scaffold.Model.extend({
       url: function() {
-        return 'api/animals/' + this.get('id') + '.json';
+        return '/api/animals/' + this.get('id');
       }
     });
 
