@@ -5,21 +5,25 @@ define(
   ],
   function(Backbone, Scaffold) {
 
+    var HelloView = Scaffold.View.extend({
+      template: 'hello'
+    });
+
+    var HelloHandler = Backbone.ActivityRouteHandler.extend({
+      onStart: function() {
+        this.updateRegions({
+          'main': [
+            new HelloView()
+          ]
+        });
+      }
+    });
+
     var HelloActivity = Backbone.Activity.extend({
-      views: {
-        Hello: Scaffold.View.extend({
-          template: 'hello'
-        })
+      handlers: {
+        'hello': new HelloHandler()
       },
-      hello: {
-        onStart: function() {
-          this.updateRegions({
-            'main': [
-              new this.views.Hello()
-            ]
-          });
-        }
-      },
+
       routes: {
         '!/hello': 'hello'
       }
@@ -32,10 +36,7 @@ define(
     var Router = Backbone.ActivityRouter.extend({
       activities: activities,
       responsive: false,
-      defaultRoute: {
-        'activityName': 'hello',
-        'handlerName': 'hello'
-      }
+      defaultRoute: '!/hello'
     });
 
     return Router;
