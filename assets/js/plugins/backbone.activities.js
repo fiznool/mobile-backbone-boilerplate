@@ -66,7 +66,7 @@
       }, this);
 
       // set up the default route
-      //if (_.isString(this._defaultRoute)) {
+      if (_.isString(this._defaultRoute)) {
 
         // the default route may contain arguments
         this._defaultRoute = this._getFragmentRoute(this._defaultRoute);
@@ -87,7 +87,7 @@
               this._defaultRoute.args);
 
           }, this));
-      //}
+      }
 
       // initialize initial layout.
       // if the router is responsive, setLayout should be called whenever the desired
@@ -128,12 +128,11 @@
     _didRoute: function(activityName, handlerName, args) {
 
       var didChangeActivity = this._currentActivityName !== activityName;
-      var didChangeRoute = didChangeActivity || (this._currentHandlerName !== handlerName);
       var activity = this.activities[this._currentActivityName];
       var handler = activity && activity.handlers[this._currentHandlerName];
 
       // first, stop the old route
-      if (this._currentActivityName && didChangeRoute) {
+      if (handler) {
         handler.onStop();
       }
 
@@ -165,17 +164,15 @@
         activity.onStart();
       }
 
-      if (didChangeRoute) {
-        if (!handler._initialized) {
-          handler.onCreate();
-          handler._initialized = true;
-        }
+      if (!handler._initialized) {
+        handler.onCreate();
+        handler._initialized = true;
+      }
 
-        handler.onStart.apply(handler, this._currentArgs);
+      handler.onStart.apply(handler, this._currentArgs);
 
-        if (this.currentLayout) {
-          handler.layouts[this.currentLayout].apply(handler, this._currentArgs);
-        }
+      if (this.currentLayout) {
+        handler.layouts[this.currentLayout].apply(handler, this._currentArgs);
       }
     },
 
