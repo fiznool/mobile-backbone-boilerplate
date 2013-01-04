@@ -94,14 +94,9 @@ define([
         this.data.list.fetch();
       },
 
-      handlers: {
-        'list': new ListHandler(),
-        'detail': new DetailHandler()
-      },
-
       routes: {
-        '!/animals': 'list',
-        '!/animals/:id': 'detail'
+        '!/animals': new ListHandler(),
+        '!/animals/:id': new DetailHandler()
       }
     });
 
