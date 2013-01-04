@@ -6,9 +6,10 @@ define(
     "router",
     "region",
     "core/device",
-    "tappivate"
+    "tappivate",
+    "core/screenmatch"
   ],
-  function($, FastClick, app, Router, Region, device, tappivate) {
+  function($, FastClick, app, Router, Region, device, tappivate, screenmatch) {
 
     $(function() {
       // Define the regions in the page; create a Region for each by passing
@@ -30,13 +31,21 @@ define(
       // Setup tappivate to mimic native button taps
       $('#app').tappivate();
 
+      // Setup ScreenMatch to listen for media query changes
+      app.on('screen:resize', app.router.setLayout, app.router);
+
+      screenmatch.listen({
+        'one-pane': 'screen and (max-width: 480px)',
+        'two-pane': 'screen and (min-width: 481px)'
+      });
+
       // Trigger the initial route, set the
       // root folder to '' by default.  Change in app.js.
       Backbone.history.start({ pushState: false, root: app.root });
 
     });
 
-    
+
     // All navigation that is relative should be passed through the navigate
     // method, to be processed by the router. If the link has a `data-bypass`
     // attribute, bypass the delegation completely.

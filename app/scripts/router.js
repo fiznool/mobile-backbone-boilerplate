@@ -11,7 +11,7 @@ define(
 
     var Router = Backbone.ActivityRouter.extend({
       activities: activities,
-      responsive: false,
+      responsive: true,
       defaultRoute: '!/animals'
     });
 

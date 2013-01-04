@@ -6,13 +6,14 @@ require.config({
   deps: ["../../vendor/jam/require.config", "main"],
 
   paths: {
-    
+
     // require often tries to load jquery from the wrong place; hardcoding the path here fixes that
     "jquery": "../../vendor/jam/jquery/dist/jquery",
     // Use the underscore build of Lo-Dash to minimize incompatibilities.
     "lodash": "../../vendor/jam/lodash/lodash.underscore",
 
     // plugins and libraries not available as jam.js packages
+    "enquire": "../../assets/js/libs/enquire",
     "recognizr": "../../assets/js/libs/recognizr",
     "fastclick": "../../assets/js/libs/fastclick",
     "tappivate": "../../assets/js/plugins/tappivate",
@@ -43,6 +44,10 @@ require.config({
     "backbone.activities": {
       deps: ["backbone"],
       exports: "Backbone"
+    },
+
+    enquire: {
+      exports: "enquire"
     },
 
     "tappivate": {
