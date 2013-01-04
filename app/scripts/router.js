@@ -1,14 +1,12 @@
 define(
   [
     "backbone.activities",
-    "activities/animals-list",
-    "activities/animals-detail"
+    "activities/animals"
   ],
-  function(Backbone, AnimalsList, AnimalsDetail) {
+  function(Backbone, Animals) {
 
     var activities = {
-      'list': new AnimalsList(),
-      'detail': new AnimalsDetail()
+      'animals': new Animals()
     };
 
     var Router = Backbone.ActivityRouter.extend({
