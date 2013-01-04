@@ -27,8 +27,8 @@ define(
       }
     });
 
-    Detail.Views.Header = Scaffold.View.extend({
-      template: 'animal-detail-header',
+    Detail.Views.Topbar = Scaffold.View.extend({
+      template: 'animal-topbar-detail',
       className: 'headerbar-inner',
       data: function() {
         return this.model.toJSON();
@@ -39,17 +39,29 @@ define(
       }
     });
 
-    return Backbone.Activity.extend({
+    Detail.Handler = Backbone.ActivityRouteHandler.extend({
 
-      'detail': {
-        onStart: function(id) {
-          this.model = new Detail.Model({id: id});
-          this.updateRegions({
-            'headerbar': new Detail.Views.Header({ model: this.model }),
-            'main': new Detail.Views.Main({ model: this.model })
-          });
-          this.model.fetch();
-        }
+      onStart: function(id) {
+        this.model = new Detail.Model({id: id});
+        this.updateRegions({
+          'headerbar': new Detail.Views.Topbar({ model: this.model }),
+          'main': new Detail.Views.Main({ model: this.model })
+        });
+        this.model.fetch();
+      },
+
+      onStop: function() {
+        // Forget the model state
+        this.model = null;  // Garbage collect model in Topbar and Main views
+        delete this.model;  // Remove model from this handler
+      }
+
+    });
+
+    var Activity = Backbone.Activity.extend({
+
+      handlers: {
+        'detail': new Detail.Handler()
       },
 
       routes: {
@@ -57,5 +69,7 @@ define(
       }
 
     });
+
+    return Activity;
 
 });

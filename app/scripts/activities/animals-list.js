@@ -7,10 +7,8 @@ define(
   function(Backbone, Scaffold, app) {
 
     var List = app.module();
-    List.Model = Scaffold.Model.extend({});
 
     List.Collection = Scaffold.Collection.extend({
-      model: List.Model,
       url: '/api/animals'
     });
 
@@ -24,7 +22,9 @@ define(
 
       data: function() {
         // Namespace the collection for Handlebars
-        return { animals: this.collection.toJSON() };
+        return {
+          animals: this.collection.toJSON()
+        };
       },
 
       initialize: function() {
@@ -33,29 +33,40 @@ define(
 
     });
 
-    List.Views.Header = Scaffold.View.extend({
-      template: 'animal-list-header',
+    List.Views.Topbar = Scaffold.View.extend({
+      template: 'animal-topbar-list',
       className: 'headerbar-inner'
     });
 
-    return Backbone.Activity.extend({
+    List.Handler = Backbone.ActivityRouteHandler.extend({
+
+      onStart: function() {
+        // Render the data when the activity starts
+        this.updateRegions({
+          'headerbar': new List.Views.Topbar(),
+          'main': new List.Views.Main({
+            collection: this.activity.collection
+          })
+        });
+
+      }
+
+    });
+
+    var Activity = Backbone.Activity.extend({
 
       initialize: function() {
         // Singleton collection
         this.collection = new List.Collection();
       },
 
-      'list': {
-        onStart: function() {
-          // Render the data when the activity starts
-          this.updateRegions({
-            'headerbar': new List.Views.Header(),
-            'main': new List.Views.Main({ collection: this.collection })
-          });
+      onCreate: function() {
+        // fetch the data when we first land on animals
+        this.collection.fetch();
+      },
 
-          this.collection.fetch();
-
-        }
+      handlers: {
+        'list': new List.Handler()
       },
 
       routes: {
@@ -63,5 +74,7 @@ define(
       }
 
     });
+
+    return Activity;
 
 });
