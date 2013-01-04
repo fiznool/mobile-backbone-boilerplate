@@ -1,18 +1,7 @@
-Important Notice
-================
+Mobile Backbone Boilerplate
+===========================
 
-This project has recently been reverted back to the original fork from tbranyen's Backbone Boilerplate. The intention is to stick more closely to the upstream changes and merge them into this project.
-
-The old master has now moved to the `old` branch. If you are still interested in using the old branch, please point your upstream remotes to `old` instead of `master`
-
-Otherwise, bear with us... the plan is to have two branches of this project to support two emerging use cases:
-
-1. A wrapped version which is optimised for delivery through PhoneGap. This will resemble the previous `master` branch and will use Zepto and take advantage of native touch events, etc.
-2. A responsive version which is intended for web apps accessed through the browser. This will use jQuery for best compatibility, click events, etc.
-
-Sorry for the inconvenience.
-
-
+A mobile-optimised version of the original Backbone Boilerplate project. Comes complete with a typical list-detail example application.
 
 ![Boilerplate](https://github.com/tbranyen/backbone-boilerplate/raw/assets/header.png)
 
@@ -46,7 +35,7 @@ View the Backbone Boilerplate documentation here:
 
 ## Build process ##
 
-To use the new and improved build process, please visit the 
+To use the new and improved build process, please visit the
 [grunt-bbb](https://github.com/backbone-boilerplate/grunt-bbb)
 plugin repo and follow the instructions to install.  Basing your project off
 this repo will allow the `bbb` commands to work out-of-the-box.
