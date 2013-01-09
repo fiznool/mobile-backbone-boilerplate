@@ -37,11 +37,15 @@ define(
         var done = this.async();
 
         // Seek out the template asynchronously.
+        // Explicitly specify the template as HTML
+        // as some mobile WebViews will return a template
+        // containing a single wrapper div as an
+        // XML Document object
         $.get(app.root + path, function(contents) {
           JST[path] = Handlebars.compile(contents);
           JST[path].__compiled__ = true;
           done(JST[path]);
-        });
+        }, 'html');
       }
     });
 

@@ -16,7 +16,7 @@ define([
       template: 'detail-main',
       className: 'detail',
 
-      data: function() {
+      serialize: function() {
         return this.model.toJSON();
       },
 

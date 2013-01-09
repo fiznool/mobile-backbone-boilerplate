@@ -51,6 +51,15 @@ define(
           if (_.isFunction(this.dispose)) {
             this.dispose();
           }
+        },
+
+        // Default serialize function, if a model exsits.
+        serialize: function() {
+          var data;
+          if (this.model) {
+            data = this.model.toJSON();
+          }
+          return data;
         }
       })
     };
