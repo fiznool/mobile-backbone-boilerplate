@@ -18,7 +18,7 @@ define([
         'data-tap': 'list'
       },
 
-      data: function() {
+      serialize: function() {
         // Namespace the collection for Handlebars
         return {
           animals: this.collection.toJSON()
