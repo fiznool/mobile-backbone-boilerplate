@@ -17,17 +17,18 @@
   <script src="vendor/jasmine-html.js"></script>
 
   <!-- Load application -->
-  <script data-main="../../app/config"
+  <script data-main="../../app/scripts/config"
     src="../../vendor/jam/require.js"></script>
 
   <!-- Declare your spec files to be run here -->
   <script>
     // Ensure you point to where your spec folder is, base directory is app/,
     // which is why ../test is necessary
-    require({ paths: { spec: "../test/jasmine/spec" } }, [
+    require({ paths: { spec: "../../test/jasmine/spec" } }, [
 
       // Load the example spec, replace this and add your own spec
-      "spec/example.spec"
+      //"spec/example.spec",
+      "spec/animals.spec"
 
     ], function() {
       // Set up the jasmine reporters once each spec has been loaded
