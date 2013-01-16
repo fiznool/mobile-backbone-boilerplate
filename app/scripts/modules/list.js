@@ -25,8 +25,13 @@ define([
         };
       },
 
+      doRender: function() {
+        this.render.apply(this, arguments);
+      },
+
       initialize: function() {
-        this.bindTo(this.collection, 'reset', this.render);
+        this.collection = this.collection || new List.Collection();
+        this.bindTo(this.collection, 'reset', this.doRender);
       }
 
     });

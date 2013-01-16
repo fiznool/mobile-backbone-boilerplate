@@ -4,18 +4,18 @@ define(
     "fastclick",
     "app",
     "router",
-    "region",
+    "scaffold",
     "core/device",
     "tappivate"
   ],
-  function($, FastClick, app, Router, Region, device, tappivate) {
+  function($, FastClick, app, Router, Scaffold, device, tappivate) {
 
     $(function() {
       // Define the regions in the page; create a Region for each by passing
       // in the parent element.
       var regions = {
-        'headerbar': new Region({ el: '#headerbar' }),
-        'main': new Region({ el: '#main' })
+        'headerbar': new Scaffold.Region({ el: '#headerbar' }),
+        'main': new Scaffold.Region({ el: '#main' })
       };
 
       // Set up the router for the application and pass in the regions.
@@ -36,7 +36,7 @@ define(
 
     });
 
-    
+
     // All navigation that is relative should be passed through the navigate
     // method, to be processed by the router. If the link has a `data-bypass`
     // attribute, bypass the delegation completely.

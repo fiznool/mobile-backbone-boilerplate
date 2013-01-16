@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Backbone Boilerplate Jasmine Test Suite</title>
+
+  <!-- Jasmine styles -->
+  <link rel="stylesheet" href="test/vendor/jasmine.css">
+</head>
+
+<body>
+  <div id="sandbox" style:"overflow: hidden; visibility: hidden; height: 1px;"></div>
+  <!-- Testing libs -->
+  <script src="test/vendor/jasmine.js"></script>
+  <script src="test/vendor/jasmine-html.js"></script>
+  <script src="test/vendor/jasmine-jquery.js"></script>
+
+  <!-- Load application -->
+  <script data-main="app/scripts/config"
+    src="vendor/jam/require.js"></script>
+
+  <!-- Declare your spec files to be run here -->
+  <script>
+    // Ensure you point to where your spec folder is, base directory is app/scripts/,
+    // which is why ../../test is necessary
+    require({ paths: { spec: "../../test/spec" } }, [
+
+      // Load the example spec, replace this and add your own spec
+      //"spec/example.spec",
+      "spec/animals.spec"
+
+    ], function() {
+
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      jasmineEnv.execute();
+
+    });
+  </script>
+</body>
+</html>

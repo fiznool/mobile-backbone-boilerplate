@@ -3,10 +3,10 @@ require.config({
 
   // Initialize the application with the main application file and the JamJS
   // generated configuration file.
-  deps: ["../../vendor/jam/require.config", "main"],
+  deps: ["../../vendor/jam/require.config"],
 
   paths: {
-    
+
     // require often tries to load jquery from the wrong place; hardcoding the path here fixes that
     "jquery": "../../vendor/jam/jquery/dist/jquery",
     // Use the underscore build of Lo-Dash to minimize incompatibilities.
@@ -17,7 +17,9 @@ require.config({
     "fastclick": "../../assets/js/libs/fastclick",
     "tappivate": "../../assets/js/plugins/tappivate",
     "backbone.activities": "../../assets/js/plugins/backbone.activities",
-    "backbone.super": "../../assets/js/plugins/backbone.super"
+    "backbone.super": "../../assets/js/plugins/backbone.super",
+
+    'scaffold': 'core/scaffold'
   },
 
   map: {
