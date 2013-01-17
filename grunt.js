@@ -82,6 +82,8 @@ module.exports = function(grunt) {
     // This task uses James Burke's excellent r.js AMD build tool.  In the
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
+      baseUrl: 'app/scripts',
+
       // Include the main configuration file.
       mainConfigFile: "app/scripts/config.js",
 
@@ -92,10 +94,12 @@ module.exports = function(grunt) {
       out: "dist/debug/require.js",
 
       // Root application module.
-      name: "config",
+      name: "run",
+      deps: ['config', 'main'],
 
       // Do not wrap everything in an IIFE.
       wrap: false
+
     },
 
     // The concatenate task is used here to merge the almond require/define
