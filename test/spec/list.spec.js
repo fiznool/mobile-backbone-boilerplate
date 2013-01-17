@@ -1,9 +1,8 @@
 // Tests are derived from the excellent book by Addy Osmani
 // http://addyosmani.github.com/backbone-fundamentals/#unit-testing-backbone-applications-with-jasmine
 define([
-  'scaffold',
   'modules/list'
-  ], function(Scaffold, List) {
+  ], function(List) {
 
     describe("animals list module", function() {
 

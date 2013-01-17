@@ -19,6 +19,8 @@
   <script src="test/vendor/jasmine-jquery.js"></script>
   <script src="test/vendor/jasmine.async.js"></script>
 
+  <script src="test/custom-matchers.js"></script>
+
   <!-- Load application -->
   <script data-main="app/scripts/config"
     src="vendor/jam/require.js"></script>
@@ -28,7 +30,8 @@
     require({ paths: { spec: "../../test/spec" } }, [
 
       // Put your test specs here
-      "spec/list.spec"
+      "spec/list.spec",
+      "spec/detail.spec"
 
       ], function() {
         var jasmineEnv = jasmine.getEnv();
