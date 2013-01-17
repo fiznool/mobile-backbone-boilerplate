@@ -17,14 +17,33 @@
   <script src="test/vendor/jasmine.js"></script>
   <script src="test/vendor/jasmine-html.js"></script>
   <script src="test/vendor/jasmine-jquery.js"></script>
+  <script src="test/vendor/jasmine.async.js"></script>
 
   <!-- Load application -->
-  <script data-main="test/run"
+  <script data-main="app/scripts/config"
     src="vendor/jam/require.js"></script>
 
   <!-- Declare your spec files to be run here -->
   <script>
+    require({ paths: { spec: "../../test/spec" } }, [
 
+      // Put your test specs here
+      "spec/list.spec"
+
+      ], function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var htmlReporter = new jasmine.HtmlReporter();
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.specFilter = function(spec) {
+          return htmlReporter.specFilter(spec);
+        };
+
+        jasmineEnv.execute();
+      });
   </script>
 </body>
 </html>

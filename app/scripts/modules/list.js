@@ -31,8 +31,13 @@ define([
 
       initialize: function() {
         this.collection = this.collection || new List.Collection();
-        this.bindTo(this.collection, 'reset', this.doRender);
+        this.startListening();
+      },
+
+      startListening: function() {
+        this.listenTo(this.collection, 'reset', this.render);
       }
+
 
     });
 

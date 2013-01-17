@@ -76,7 +76,14 @@ define([
 
         });
 
+        // LayoutManager uses promises for rendering.
+        // We need to wait for the promise to be resolved before
+        // testing that rendering has worked correctly.
+        // For this, we use the jasmine Async plugin:
+        // http://lostechies.com/derickbailey/2012/08/18/jasmine-async-making-asynchronous-testing-with-jasmine-suck-less/
         describe("rendering", function() {
+
+          var async = new AsyncSpec(this);
 
           beforeEach(function() {
             v = new List.Views.Main();
@@ -86,46 +93,40 @@ define([
             v = null;
           });
 
-          it("produces an empty list with no collection data", function() {
-            // We must use the async style as rendering is done using promises.
-            // http://lostechies.com/derickbailey/2012/08/18/jasmine-async-making-asynchronous-testing-with-jasmine-suck-less/
-            var done = false;
-
-            runs(function() {
-              v.render().then(function() {
-                expect(v.el.outerHTML).toBe('<ul data-tap="list" class="list"></ul>');
-                done = true;
-              });
+          async.it("produces an empty list with no collection data", function(done) {
+            v.render().then(function() {
+              expect(v.el.outerHTML).toBe('<ul data-tap="list" class="list"></ul>');
+              done();
             });
-
-            waitsFor(function() { return done; });
 
           });
 
-          it("produces a list with some collection data", function() {
-            var done = false;
-
+          async.it("produces a list with some collection data", function(done) {
             v.collection = new List.Collection([
               { name: 'Lion', id: 'lion' },
               { name: 'Badger', id: 'badger'}
             ]);
 
-            runs(function() {
-              v.render().then(function() {
-                expect(v.el.innerHTML).toBe('<li><a href="#!/animals/lion">Lion</a></li><li><a href="#!/animals/badger">Badger</a></li>');
-                done = true;
-              });
+            v.render().then(function() {
+              expect(v.el.innerHTML).toBe('<li><a href="#!/animals/lion">Lion</a></li><li><a href="#!/animals/badger">Badger</a></li>');
+              done();
             });
-
-            waitsFor(function() { return done; });
 
           });
 
           it("renders when collection changes", function() {
             var done = false;
 
-            //spyOn(v, 'render');
             spyOn(v, 'render');
+
+            // To test Backbone events, you should put all your
+            // 'listenTo' calls in a separate function.
+            // This is so that the spy setup above can be re-bound
+            // to the Backbone event by calling stopListening
+            // and then startListening again.
+            // Without this call, render cannot be spied on.
+            v.stopListening();
+            v.startListening();
 
             v.collection.reset([
               { name: 'Lion', id: 'lion' },
@@ -134,34 +135,12 @@ define([
 
             expect(v.render).toHaveBeenCalled();
 
-            //expect(v.serialize).toHaveBeenCalled();
-            //expect(v.render).toHaveBeenCalled();
           });
 
         });
 
       });
-      /*
-      it("renders the view with correct data", function() {
-        var collection = new List.Collection();
-        var view = new List.Views.Main({
-          el: '#sandbox',
-          collection: collection
-        });
 
-        spyOn(view, 'render');
-        spyOn(view, 'serialize');
-
-        collection.reset([
-          { name: 'Lion', href: 'lion' },
-          { name: 'Badger', href: 'badger'}
-        ]);
-
-        expect(view.serialize).toHaveBeenCalled();
-        expect(view.render).toHaveBeenCalled();
-
-      });
-      */
     });
 
 });
