@@ -82,8 +82,6 @@ module.exports = function(grunt) {
     // This task uses James Burke's excellent r.js AMD build tool.  In the
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
-      baseUrl: 'app/scripts',
-
       // Include the main configuration file.
       mainConfigFile: "app/scripts/config.js",
 
@@ -94,8 +92,8 @@ module.exports = function(grunt) {
       out: "dist/debug/require.js",
 
       // Root application module.
-      name: "run",
-      deps: ['config', 'main'],
+      name: "main",
+      deps: ["config"],
 
       // Do not wrap everything in an IIFE.
       wrap: false
@@ -253,12 +251,15 @@ module.exports = function(grunt) {
 
   });
 
-  // The prepare task will remove all contents inside the dist/ folder, lint
-  // all your code, precompile all the Handlebars templates into
+  // The preflight task will lint your code and run the jasmine tests.
+  grunt.registerTask("preflight", "lint jasmine");
+
+  // The prepare task will run the preflight, remove all contents inside
+  // the dist/ folder, precompile all the Handlebars templates into
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("prepare", "clean lint handlebars requirejs concat");
+  grunt.registerTask("prepare", "preflight clean handlebars requirejs concat");
 
   // The debug task will run the prepare tasks and then compile the CSS files.
   grunt.registerTask("debug", "prepare compass:debug");
