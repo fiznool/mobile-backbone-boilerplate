@@ -47,7 +47,11 @@ define([
 
       initialize: function() {
         this.model = this.model || new Detail.Model();
-        this.bindTo(this.model, 'change', this.render);
+        this.startListening();
+      },
+
+      startListening: function() {
+        this.listenTo(this.model, 'change', this.render);
       }
     });
 
