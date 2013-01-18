@@ -1,2 +1,4 @@
 define(["config"],
-function() { require(["main"]); });
+function() { 
+  require(["main"]);
+});
