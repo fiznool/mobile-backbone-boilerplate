@@ -7,6 +7,14 @@ define([
     var Detail = app.module();
 
     Detail.Model = Scaffold.Model.extend({
+
+      defaults: {
+        id: null,
+        name: '',
+        description: '',
+        img: ''
+      },
+
       url: function() {
         return '/api/animals/' + this.get('id');
       }
@@ -16,12 +24,17 @@ define([
       template: 'detail-main',
       className: 'detail',
 
-      data: function() {
+      serialize: function() {
         return this.model.toJSON();
       },
 
       initialize: function() {
-        this.bindTo(this.model, 'change', this.render);
+        this.model = this.model || new Detail.Model();
+        this.startListening();
+      },
+
+      startListening: function() {
+        this.listenTo(this.model, 'change', this.render);
       }
     });
 
@@ -33,6 +46,7 @@ define([
       },
 
       initialize: function() {
+        this.model = this.model || new Detail.Model();
         this.bindTo(this.model, 'change', this.render);
       }
     });

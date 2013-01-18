@@ -18,16 +18,26 @@ define([
         'data-tap': 'list'
       },
 
-      data: function() {
+      serialize: function() {
         // Namespace the collection for Handlebars
         return {
           animals: this.collection.toJSON()
         };
       },
 
+      doRender: function() {
+        this.render.apply(this, arguments);
+      },
+
       initialize: function() {
-        this.bindTo(this.collection, 'reset', this.render);
+        this.collection = this.collection || new List.Collection();
+        this.startListening();
+      },
+
+      startListening: function() {
+        this.listenTo(this.collection, 'reset', this.render);
       }
+
 
     });
 

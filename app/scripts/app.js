@@ -46,6 +46,11 @@ define(
         // via app.trigger() at a later date
         _.each(module, _registerWith(namespace, context));
 
+      },
+
+      // Deregister everything previously bound to this module.
+      deregister: function(module) {
+        app.off(null, null, module);
       }
 
     }, Backbone.Events);

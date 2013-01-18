@@ -1,22 +1,23 @@
-define(
+require(
   [
     "jquery",
     "fastclick",
     "app",
     "router",
-    "region",
+    "scaffold",
     "core/device",
     "tappivate",
     "core/screenmatch"
   ],
-  function($, FastClick, app, Router, Region, device, tappivate, screenmatch) {
+
+  function($, FastClick, app, Router, Scaffold, device, tappivate, screenmatch) {
 
     $(function() {
       // Define the regions in the page; create a Region for each by passing
       // in the parent element.
       var regions = {
-        'headerbar': new Region({ el: '#headerbar' }),
-        'main': new Region({ el: '#main' })
+        'headerbar': new Scaffold.Region({ el: '#headerbar' }),
+        'main': new Scaffold.Region({ el: '#main' })
       };
 
       // Set up the router for the application and pass in the regions.

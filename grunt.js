@@ -92,10 +92,12 @@ module.exports = function(grunt) {
       out: "dist/debug/require.js",
 
       // Root application module.
-      name: "config",
+      name: "main",
+      deps: ["config"],
 
       // Do not wrap everything in an IIFE.
       wrap: false
+
     },
 
     // The concatenate task is used here to merge the almond require/define
@@ -194,16 +196,10 @@ module.exports = function(grunt) {
       }
     },
 
-    // The headless QUnit testing environment is provided for "free" by Grunt.
-    // Simply point the configuration to your test directory.
-    qunit: {
-      all: ["test/qunit/*.html"]
-    },
-
     // The headless Jasmine testing is provided by grunt-jasmine-task. Simply
     // point the configuration to your test directory.
     jasmine: {
-      all: ["test/jasmine/*.html"]
+      all: ["spec.html"]
     },
 
     // The watch task can be used to monitor the filesystem and execute
@@ -255,12 +251,15 @@ module.exports = function(grunt) {
 
   });
 
-  // The prepare task will remove all contents inside the dist/ folder, lint
-  // all your code, precompile all the Handlebars templates into
+  // The preflight task will lint your code and run the jasmine tests.
+  grunt.registerTask("preflight", "lint jasmine");
+
+  // The prepare task will run the preflight, remove all contents inside
+  // the dist/ folder, precompile all the Handlebars templates into
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("prepare", "clean lint handlebars requirejs concat");
+  grunt.registerTask("prepare", "preflight clean handlebars requirejs concat");
 
   // The debug task will run the prepare tasks and then compile the CSS files.
   grunt.registerTask("debug", "prepare compass:debug");

@@ -1,13 +1,17 @@
 define(
   [
+    // Core
     "jquery",
     "lodash",
     "backbone",
-    "backbone.layoutmanager",
     "handlebars",
-    "app"
+    "app",
+
+    // Plugins
+    "backbone.layoutmanager",
+    "backbone.super"
   ],
-  function($, _, Backbone, layoutmanager, Handlebars, app) {
+  function($, _, Backbone, Handlebars, app) {
 
     // Localize or create a new JavaScript Template object.
     var JST = window.JST = window.JST || {};
@@ -37,15 +41,44 @@ define(
         var done = this.async();
 
         // Seek out the template asynchronously.
+        // Explicitly specify the template as HTML
+        // as some mobile WebViews will return a template
+        // containing a single wrapper div as an
+        // XML Document object
         $.get(app.root + path, function(contents) {
           JST[path] = Handlebars.compile(contents);
           JST[path].__compiled__ = true;
           done(JST[path]);
-        });
+        }, 'html');
       }
     });
 
-    // Region is Layout
-    return Backbone.Layout;
+    var Scaffold = {
+      Model: Backbone.Model.extend({}),
 
+      Collection: Backbone.Collection.extend({}),
+
+      View: Backbone.View.extend({
+
+        cleanup: function() {
+          this.stopListening();
+          if (_.isFunction(this.dispose)) {
+            this.dispose();
+          }
+        },
+
+        // Default serialize function, if a model exsits.
+        serialize: function() {
+          var data;
+          if (this.model) {
+            data = this.model.toJSON();
+          }
+          return data;
+        }
+      }),
+
+      Region: Backbone.Layout
+    };
+
+    return Scaffold;
 });
