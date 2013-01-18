@@ -25,10 +25,6 @@ define([
         };
       },
 
-      doRender: function() {
-        this.render.apply(this, arguments);
-      },
-
       initialize: function() {
         this.collection = this.collection || new List.Collection();
         this.startListening();

@@ -69,11 +69,9 @@ define(
 
         // Default serialize function, if a model exsits.
         serialize: function() {
-          var data;
           if (this.model) {
-            data = this.model.toJSON();
+            return this.model.toJSON();
           }
-          return data;
         }
       }),
 
