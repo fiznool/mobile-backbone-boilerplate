@@ -9,17 +9,15 @@ require.config({
 
   paths: {
 
-    // require often tries to load jquery from the wrong place; hardcoding the path here fixes that
-    "jquery": "../../vendor/jam/jquery/dist/jquery",
     // Use the underscore build of Lo-Dash to minimize incompatibilities.
     "lodash": "../../vendor/jam/lodash/lodash.underscore",
 
     // plugins and libraries not available as jam.js packages
-    "recognizr": "../../assets/js/libs/recognizr",
-    "fastclick": "../../assets/js/libs/fastclick",
-    "tappivate": "../../assets/js/plugins/tappivate",
-    "backbone.activities": "../../assets/js/plugins/backbone.activities",
-    "backbone.super": "../../assets/js/plugins/backbone.super",
+    "recognizr": "../../vendor/js/libs/recognizr",
+    "fastclick": "../../vendor/js/libs/fastclick",
+    "tappivate": "../../vendor/js/plugins/tappivate",
+    "backbone.activities": "../../vendor/js/plugins/backbone.activities",
+    "backbone.super": "../../vendor/js/plugins/backbone.super",
 
     'scaffold': 'core/scaffold'
   },

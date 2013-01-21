@@ -18,7 +18,7 @@ var jam = {
         {
             "name": "jquery",
             "location": "../../vendor/jam/jquery",
-            "main": "jquery.js"
+            "main": "dist/jquery.js"
         },
         {
             "name": "lodash",
