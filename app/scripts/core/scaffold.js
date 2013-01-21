@@ -4,22 +4,21 @@ define(
     "jquery",
     "lodash",
     "backbone",
+    "backbone.layoutmanager",
     "handlebars",
     "app",
 
     // Plugins
-    "backbone.layoutmanager",
     "backbone.super"
   ],
-  function($, _, Backbone, Handlebars, app) {
+  function($, _, Backbone, LayoutManager, Handlebars, app) {
 
     // Localize or create a new JavaScript Template object.
     var JST = window.JST = window.JST || {};
 
     // Configure LayoutManager with Backbone Boilerplate defaults.
-    Backbone.LayoutManager.configure({
+    Backbone.Layout.configure({
       // Allow LayoutManager to augment Backbone.View.prototype.
-      // This means we don't need to inherit from Backbone.LayoutView
       manage: true,
 
       prefix: "app/templates/",
@@ -49,7 +48,7 @@ define(
           JST[path] = Handlebars.compile(contents);
           JST[path].__compiled__ = true;
           done(JST[path]);
-        }, 'html');
+        }, "text");
       }
     });
 
@@ -59,6 +58,11 @@ define(
       Collection: Backbone.Collection.extend({}),
 
       View: Backbone.View.extend({
+
+        bindTo: function(object, evt, callback) {
+          // Alias for old code
+          this.listenTo(object, evt, callback);
+        },
 
         cleanup: function() {
           this.stopListening();
