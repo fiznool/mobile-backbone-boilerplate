@@ -9,6 +9,7 @@ require(
     "tappivate",
     "core/screenmatch"
   ],
+
   function($, FastClick, app, Router, Scaffold, device, tappivate, screenmatch) {
 
     $(function() {
