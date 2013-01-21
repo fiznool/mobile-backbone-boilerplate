@@ -24,10 +24,6 @@ define([
       template: 'detail-main',
       className: 'detail',
 
-      serialize: function() {
-        return this.model.toJSON();
-      },
-
       initialize: function() {
         this.model = this.model || new Detail.Model();
         this.startListening();
@@ -41,13 +37,14 @@ define([
     Detail.Views.Topbar = Scaffold.View.extend({
       template: 'detail-topbar',
       className: 'headerbar-inner',
-      data: function() {
-        return this.model.toJSON();
-      },
-
+      
       initialize: function() {
         this.model = this.model || new Detail.Model();
-        this.bindTo(this.model, 'change', this.render);
+        this.startListening();
+      },
+
+      startListening: function() {
+        this.listenTo(this.model, 'change', this.render);
       }
     });
 
