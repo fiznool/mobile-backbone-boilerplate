@@ -17,7 +17,7 @@ define(
     var JST = window.JST = window.JST || {};
 
     // Configure LayoutManager with Backbone Boilerplate defaults.
-    Backbone.Layout.configure({
+    LayoutManager.configure({
       // Allow LayoutManager to augment Backbone.View.prototype.
       manage: true,
 

@@ -2044,12 +2044,12 @@ var jam = {
     "packages": [
         {
             "name": "backbone",
-            "location": "../vendor/jam/backbone",
+            "location": "../../vendor/jam/backbone",
             "main": "backbone.js"
         },
         {
             "name": "backbone.layoutmanager",
-            "location": "../vendor/jam/backbone.layoutmanager",
+            "location": "../../vendor/jam/backbone.layoutmanager",
             "main": "backbone.layoutmanager.js"
         },
         {
@@ -2064,12 +2064,12 @@ var jam = {
         },
         {
             "name": "lodash",
-            "location": "../vendor/jam/lodash",
+            "location": "../../vendor/jam/lodash",
             "main": "./lodash.js"
         },
         {
             "name": "underscore",
-            "location": "../vendor/jam/underscore",
+            "location": "../../vendor/jam/underscore",
             "main": "underscore.js"
         }
     ],
@@ -2087,7 +2087,7 @@ var jam = {
                 "backbone",
                 "underscore"
             ],
-            "exports": "Backbone.LayoutManager"
+            "exports": "Backbone.Layout"
         },
         "underscore": {
             "exports": "_"
