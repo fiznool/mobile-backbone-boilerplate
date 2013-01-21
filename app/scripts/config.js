@@ -3,7 +3,7 @@ require.config({
 
   // Initialize the application with the main application file and the JamJS
   // generated configuration file.
-  deps: ["../../vendor/jam/require.config", "main"],
+  deps: ["../../vendor/jam/require.config"],
 
   paths: {
 
@@ -18,7 +18,9 @@ require.config({
     "fastclick": "../../assets/js/libs/fastclick",
     "tappivate": "../../assets/js/plugins/tappivate",
     "backbone.activities": "../../assets/js/plugins/backbone.activities",
-    "backbone.super": "../../assets/js/plugins/backbone.super"
+    "backbone.super": "../../assets/js/plugins/backbone.super",
+
+    'scaffold': 'core/scaffold'
   },
 
   map: {

@@ -1,13 +1,17 @@
 define(
   [
+    // Core
     "jquery",
     "lodash",
     "backbone",
-    "backbone.layoutmanager",
     "handlebars",
-    "app"
+    "app",
+
+    // Plugins
+    "backbone.layoutmanager",
+    "backbone.super"
   ],
-  function($, _, Backbone, layoutmanager, Handlebars, app) {
+  function($, _, Backbone, Handlebars, app) {
 
     // Localize or create a new JavaScript Template object.
     var JST = window.JST = window.JST || {};
@@ -49,7 +53,30 @@ define(
       }
     });
 
-    // Region is Layout
-    return Backbone.Layout;
+    var Scaffold = {
+      Model: Backbone.Model.extend({}),
 
+      Collection: Backbone.Collection.extend({}),
+
+      View: Backbone.View.extend({
+
+        cleanup: function() {
+          this.stopListening();
+          if (_.isFunction(this.dispose)) {
+            this.dispose();
+          }
+        },
+
+        // Default serialize function, if a model exsits.
+        serialize: function() {
+          if (this.model) {
+            return this.model.toJSON();
+          }
+        }
+      }),
+
+      Region: Backbone.Layout
+    };
+
+    return Scaffold;
 });
