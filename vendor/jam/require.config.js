@@ -45,7 +45,7 @@ var jam = {
                 "backbone",
                 "underscore"
             ],
-            "exports": "Backbone.LayoutManager"
+            "exports": "Backbone.Layout"
         },
         "underscore": {
             "exports": "_"
