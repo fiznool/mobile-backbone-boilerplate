@@ -11,7 +11,7 @@ function(LayoutManager) {
   // creation.
   var app = {
     // The root path to run the application.
-    root: "/"
+    root: ""
   };
 
   // Localize or create a new JavaScript Template object.
@@ -42,6 +42,57 @@ function(LayoutManager) {
       }, "text");
     }
   });
+
+  var ready;
+
+  var nativeBridge = (function() {
+    if (window.cordova) {
+
+      window.jsapp = {
+        // This global should be used to receive messages from Cordova
+        // native plugins. A good workflow is to fire app events when
+        // these messages are received.
+
+      };
+
+      // Populate the ready function
+      ready = function(cb) {
+        // Wait for the Cordova 'deviceready' event, which occurs when
+        // Cordova has fully initialised the native side.
+        // When the deviceready event is received, trigger the router.
+        document.addEventListener("deviceready", function() {
+          cb.apply();
+        }, false);
+      };
+        
+
+      return {
+        // Place functions in here which will call the native cordova layer.
+        // http://docs.phonegap.com/en/2.3.0/guide_plugin-development_index.md.html
+        // The cordova API is as follows:
+        // cordova.exec(function(winParam) {}, function(error) {},
+        //  "service", "action", ["firstArgument", "secondArgument"]);
+
+      };
+
+    } else {
+
+      ready = function(cb) {
+        // In a non-cordova environment, just run the callback
+        // immediately.
+        cb.apply();
+      };
+
+      return {
+        // Place functions in here for use in a non-Cordova environment.
+        // These should follow the functions defined above,
+        // so that the app can still function when it is accessed
+        // in the browser.
+
+      };
+
+    }
+  })();
 
   // Mix Backbone.Events, modules, and layout management into the app object.
   return _.extend(app, {
@@ -78,7 +129,11 @@ function(LayoutManager) {
 
       // Cache the refererence.
       return this.layout;
-    }
+    },
+
+    ready: ready,
+    nativeBridge: nativeBridge
+
   }, Backbone.Events);
 
 });
