@@ -8,7 +8,7 @@ require.config({
   paths: {
 
     // Use the underscore build of Lo-Dash to minimize incompatibilities.
-    "lodash": "../../vendor/jam/lodash/lodash.underscore",
+    "lodash": "../../vendor/jam/lodash/dist/lodash.underscore",
 
     // plugins and libraries not available as jam.js packages
     "recognizr": "../../vendor/js/libs/recognizr",
@@ -41,7 +41,7 @@ require.config({
 
     // Backbone.Activities depends on Backbone and exports Backbone
     "backbone.activities": {
-      deps: ["backbone"],
+      deps: ["backbone", "backbone.layoutmanager"],
       exports: "Backbone"
     },
 
