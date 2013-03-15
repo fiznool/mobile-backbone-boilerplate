@@ -1,6 +1,6 @@
 # Modifications needed to build the project
 
-These instructions refer to bbb 0.2.0-alpha-4.
+These instructions refer to bbb 0.2.0-alpha-4 and 0.2.0-alpha-5.
 
 ## Path to bbb files
 
@@ -9,7 +9,7 @@ If you have installed `bbb` globally with `npm install -g bbb` then the root fol
  - OS X Mountain Lion: one of the following (depending on how you installed node):
    - `/usr/local/share/npm/lib/node_modules/bbb/`
    - `/usr/local/lib/node_modules/bbb`
- - Ubuntu 12.10: /usr/lib/node_modules/bbb/
+ - Ubuntu 12.10: `/usr/lib/node_modules/bbb/`
 
 This folder will be refered to as $BBB_ROOT below.
 
