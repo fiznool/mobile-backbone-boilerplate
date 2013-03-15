@@ -6,12 +6,12 @@ These instructions refer to bbb 0.2.0-alpha-4.
 
 If you have installed `bbb` globally with `npm install -g bbb` then the root folder of the bbb files can be found as follows:
 
- - OS X Mountain Lion: one of the following (dependong on how you installed node):
+ - OS X Mountain Lion: one of the following (depending on how you installed node):
    - `/usr/local/share/npm/lib/node_modules/bbb/`
    - `/usr/local/lib/node_modules/bbb`
  - Ubuntu 12.10: /usr/lib/node_modules/bbb/
 
-This folder will be refered to ad $BBB_ROOT below.
+This folder will be refered to as $BBB_ROOT below.
 
 ## Handlebars task
 
